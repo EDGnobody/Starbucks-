@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: coffee_order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/coffee_order
+    username: root
+    password: 2004
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.starbucks.coffee_order.pojo
