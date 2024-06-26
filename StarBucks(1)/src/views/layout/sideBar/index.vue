@@ -11,7 +11,7 @@ import bottombar from './bottombar.vue'
 </script>
 <style>
 .sidebar{
-  width:490px;
+  width:30vw;
   height: 100vh;
  background-color: #fff;
   position: fixed;

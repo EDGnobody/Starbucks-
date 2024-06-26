@@ -22,7 +22,7 @@ import { RouterView,RouterLink } from 'vue-router';
 }
 .navigate{
   height: 100vh;
- width: 500px;
+ width: 30vw;
  position: absolute;
  left:0;
  top:0;
@@ -33,7 +33,6 @@ import { RouterView,RouterLink } from 'vue-router';
 margin-left: 490px;
 /* background-color: #df1515; */
 position: absolute;
-width: 58.5vw;
-
+top:0;
 }
 </style>

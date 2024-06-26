@@ -20,6 +20,7 @@ declare module 'vue' {
     History: typeof import('./../../src/components/history.vue')['default']
     Home: typeof import('./../../src/components/home.vue')['default']
     Location: typeof import('./../../src/components/location.vue')['default']
+    Login: typeof import('./../../src/components/login.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Shopcart: typeof import('./../../src/components/shopcart.vue')['default']

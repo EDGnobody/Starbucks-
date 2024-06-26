@@ -8,7 +8,7 @@
       />
       <div class="navigateArea">
         <RouterLink to="/address" class="navigate">门店</RouterLink>
-        <RouterLink to="/account" class="navigate">我的账户</RouterLink>
+        <RouterLink to="/login" class="navigate">我的账户</RouterLink>
         <RouterLink to="/store" class="navigate">菜单</RouterLink>
     </div>
   
