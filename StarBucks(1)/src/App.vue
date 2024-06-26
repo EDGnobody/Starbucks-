@@ -13,6 +13,7 @@
 
 <script lang="ts" setup >
 import sideBar from './views/layout/sideBar/index.vue';
+import { RouterView,RouterLink } from 'vue-router';
 </script>
 
 <style scoped>

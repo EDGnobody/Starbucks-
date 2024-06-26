@@ -6,16 +6,15 @@
         src="/src/images/logo.png"
         alt="logo"
       />
-      <ul>
-         <li>门店</li>
-        <li>我的账户</li>
-        <li>菜单</li>
-    </ul>
+      <div class="navigateArea">
+        <RouterLink to="/address" class="navigate">门店</RouterLink>
+        <RouterLink to="/account" class="navigate">我的账户</RouterLink>
+        <RouterLink to="/store" class="navigate">菜单</RouterLink>
+    </div>
   
     <a href="#" class="nav-menu" >
         <img
           src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/icons/icon-hamburger.svg"
-         
         />
       </a>
 </div>
@@ -23,6 +22,7 @@
 
 <script lang="ts" setup >
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router';
 </script>
 
 <style scoped>
@@ -40,16 +40,22 @@ import { ref } from 'vue'
     margin-top: 25px;
     margin-left: 20px;
 }
-ul{
+.navigateArea{
     position: absolute;
-    top:15px;
-    left:30px;
+    width: 400px;
+    height: 50px;
+    top: 0px;
+    left: 100px;
     list-style: none;
 }
-li{
-    display: inline;
+.navigate{
     margin-left: 20px;
+    position: relative;
     font-weight: bold;
+    font-size: large;
+    display: inline;
+    color: black;
+    text-decoration: none;
 }
 a{
     position: absolute;
