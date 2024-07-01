@@ -1,7 +1,7 @@
 <template>
-<!-- 这是用户账户页 -->
+<!-- 这是用户登录页 -->
  <div>
-    <img src="../images/image.png" alt="欢迎加入星享俱乐部">
+    <img src="../images/club.png" alt="欢迎加入星享俱乐部">
  </div>
  <div class="form">
     <!-- 用户名输入框 -->

@@ -19,6 +19,7 @@ import { RouterView,RouterLink } from 'vue-router';
 <style scoped>
 .app{
   display: flex;
+
 }
 .navigate{
   height: 100vh;
@@ -31,7 +32,6 @@ import { RouterView,RouterLink } from 'vue-router';
   flex-grow:1;
   height: 100vh;
 margin-left: 490px;
-/* background-color: #df1515; */
 position: absolute;
 top:0;
 }

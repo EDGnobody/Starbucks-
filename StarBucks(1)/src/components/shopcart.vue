@@ -1,5 +1,35 @@
 <template>
-<div>这是购物车</div>
+<div>
+    <img src="../images/club.png" alt="">
+</div>
+<div>
+    <el-carousel :interval="4000" type="card" height="200px">
+    <el-carousel-item v-for="item in 6" :key="item">
+      <h3 text="2xl" justify="center">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</div>
+<div>
+<el-row :gutter="20">
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
+   
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
+  </el-row>
+  </div>
+ 
 </template>
 
 <script lang="ts" setup >
@@ -7,5 +37,39 @@
 </script>
 
 <style scoped>
+img{
+    width: 100%;
+    height: auto;
+}
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+  text-align: center;
+}
 
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+.el-row {
+    width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
 </style>
