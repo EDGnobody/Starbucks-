@@ -3,8 +3,7 @@
       <section class="swiper">
         <router-link to="register">
           <img
-            src="https://www.starbucks.com.cn/images/pages/about-careers-top.png"
-            alt
+            src="../assets/about-careers-top.png"
           />
         </router-link>
         <div class="text">广告</div>
@@ -12,8 +11,7 @@
       <section class="swiper">
         <router-link to="register">
           <img
-            src="https://artwork.starbucks.com.cn/banners-homepage-banner/main_9b62183b-633a-4dc1-a4a6-627a22cca859.png"
-            alt
+            src="../assets/homepage-banner.png"
           />
         </router-link>
         <div class="text">广告</div>
@@ -24,7 +22,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/images/pages/tmall-2020-06-29-zh.jpg"
-                alt
               />
             </a>
           </div>
@@ -32,7 +29,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/images/pages/starbucks-design-studio-web-china.jpg"
-                alt
               />
             </a>
           </div>
@@ -40,14 +36,13 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/images/pages/homepage-career-cn.jpg"
-                alt
               />
             </a>
           </div>
         </div>
       </section>
       <section class="club">
-        <div class="wrapper clear">
+        <div class="wrapper-clear">
           <div class="wrapper-left">
             <h2 class="title">星享俱乐部</h2>
             <p class="text">
@@ -61,8 +56,7 @@
           </div>
           <div class="club-logo">
             <img
-              src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/logo-msr-new.svg"
-              alt
+              src="../assets/starbucks-logo.png"
             />
           </div>
         </div>
@@ -75,7 +69,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/homepage/tmall-card-01.png"
-                alt
                 class="logo"
               />
               <h3 class="name">会员星礼包</h3>
@@ -88,7 +81,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/homepage/tmall-card-02.png"
-                alt
                 class="logo"
               />
               <h3 class="name">星礼卡</h3>
@@ -101,7 +93,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/homepage/tmall-eticket.png"
-                alt
                 class="logo"
               />
               <h3 class="name">电子产品券</h3>
@@ -114,7 +105,6 @@
             <a href="#">
               <img
                 src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/homepage/tmall-reserve.png"
-                alt
                 class="logo"
               />
               <h3 class="name">咖啡生活</h3>
@@ -128,7 +118,8 @@
       <section class="coffeehouse">
         <h2 class="title">1912 派克街 | 咖啡星讲堂</h2>
         <p class="text">了解更多星巴克咖啡文化</p>
-        <div class="wrapper">
+       
+        <div class="wrapper"id="knowledges">
           <div class="tag">
             <div class="label">咖啡品鉴</div>
             <p class="name">咖啡调制</p>
@@ -148,7 +139,6 @@
           <a href="#">
             <img
               src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/icpicon.png"
-              alt
             /> 沪公网安备 31010402000253号
           </a>|
           <a href="#">沪ICP备17003747号</a>
@@ -158,6 +148,23 @@
   </template>
   
   <style scoped lang="less">
+
+  h3 {
+    font-family: "微软雅黑"
+  }
+  a:link {
+    color:black;
+    text-decoration: none;
+  }
+  a:visited {
+    color:black;
+    text-decoration: none;
+  }
+  .wrapper-clear {
+    width: 500px;
+    height: 250px;
+    background-color: #fff;
+  }
   .home {
     padding-bottom: 55px;
     background-color: #fff;
@@ -222,7 +229,9 @@
       font-size: 22px;
       font-weight: 500;
     }
-  
+    #knowledges {
+      width: 1000px;
+    }
     p.text {
       line-height: 32px;
       font-weight: 200;
@@ -346,14 +355,16 @@
     .wrapper {
       margin: 0 auto;
       margin-top: 40px;
-      max-width: 900px;
+      max-width: 1200px;
       display: flex;
       align-content: space-between;
       justify-content: space-between;
     }
     .tag {
-      width: 32%;
-      box-shadow: 0px 1px 1px 1px #dcdcdc;
+      margin:20px;
+      width: 400px;
+      height: 240px;
+      box-shadow: 0px 2px 2px 2px #dcdcdc;
       box-sizing: border-box;
       position: relative;
       background-color: #fff;
@@ -365,7 +376,7 @@
       background-image: url("https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/homepage/coffeehouse-4-fundamentals-kv.jpg");
       padding-top: 168px;
       background-position: -80px 0px;
-      background-size: 445px;
+      background-size: 600px;
   
       div.label {
         position: absolute;
