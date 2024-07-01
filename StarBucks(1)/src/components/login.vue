@@ -65,7 +65,6 @@ async function  handleLogin() {
    login(form).then(res=>{
     console.log(res)
    })
-   router.push('/account')
     }
 </script>
 
