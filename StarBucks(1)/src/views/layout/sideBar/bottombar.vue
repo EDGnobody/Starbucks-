@@ -57,8 +57,7 @@ function ifpicked()
   display: inline;
   color: #00a862;
   font-size: 16px;
-left: 0;
-margin-top: 20px;
+
 text-decoration: none;
 
   img {
@@ -71,6 +70,7 @@ text-decoration: none;
   }
 }
 .reg {
+  margin-left: 50px;
   display: inline;
   text-decoration: none;
   width: 40px;
@@ -78,9 +78,7 @@ text-decoration: none;
   color: #00a862;
   border: 1px solid #00a862;
   border-radius: 16px;
- left: 100px;
- margin-top: 20px;
-  line-height: 16px;
+  line-height: 33px;
   vertical-align: bottom;
 }
 .home{

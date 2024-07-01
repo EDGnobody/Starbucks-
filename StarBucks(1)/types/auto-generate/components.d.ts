@@ -23,6 +23,7 @@ declare module 'vue' {
     Home: typeof import('./../../src/components/home.vue')['default']
     Location: typeof import('./../../src/components/location.vue')['default']
     Login: typeof import('./../../src/components/login.vue')['default']
+    Register: typeof import('./../../src/components/register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Shopcart: typeof import('./../../src/components/shopcart.vue')['default']

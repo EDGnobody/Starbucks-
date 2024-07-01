@@ -28,7 +28,7 @@ function tohome(){
  router.push('/')
 }
 </script>
-<style>
+<style scoped>
 .sidebar{
   width:30vw;
   height: 100vh;

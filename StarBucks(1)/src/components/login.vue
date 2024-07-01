@@ -5,11 +5,11 @@
  </div>
  <div class="form">
     <!-- 用户名输入框 -->
-    <div :class="(userInputing || form.user ?'active ':'')+'user'">
+    <div :class="(userInputing || form.username ?'active ':'')+'user'">
           <div class="text">用户名或者电子邮箱</div>
           <input
             type="text"
-            v-model="form.user"
+            v-model="form.username"
             @focus="userInputing =true"
             @blur="userInputing =false"
           />
@@ -24,11 +24,16 @@
             @blur="passwordInputing =false"
           />
     </div>
+    <!-- 注册按钮 -->
+ <div>
+  <br>
+  <RouterLink to="/register" > 没有密码？去注册</RouterLink>
+ </div>
         <!-- 登录按钮 -->
         <div class="footer clear">
           <div
-            :class="(form.user&&form.password? 'active ':'')+'login-btn'"
-            @click="login"
+            :class="(form.username&&form.password? 'active ':'')+'login-btn'"
+            @click="handleLogin"
           >登录</div>
         </div>
  </div>
@@ -42,21 +47,25 @@
 </template>
 
 <script lang="ts" setup >
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
+import { login } from '@/utils/api'
 const userInputing=ref(false);
-const form={
-        user: "",
+const form=reactive({
+        username: "",
         password: ""
-      }
+      })
 const passwordInputing=ref(false)
 const promptVisiable=ref (false)
+// 注册函数
+function register(){
 
+}
 // 登录函数
-function  login() {
-      promptVisiable.value = true;
-      setTimeout(() => {
-        promptVisiable.value = false;
-      }, 5000);
+async function  handleLogin() {
+   login(form).then(res=>{
+    console.log(res)
+   })
+   router.push('/account')
     }
 </script>
 

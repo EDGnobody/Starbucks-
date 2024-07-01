@@ -6,6 +6,7 @@ import addressView from '@/views/addressView.vue'
 import storeView from '@/views/storeView.vue'
 import homeView from '@/views/homeView.vue'
 import loginView from '@/views/loginView.vue'
+import  registerView  from '@/views/registerView.vue'
 // 2 创建一个路由: 映射关系
 const router = createRouter({
   // 2.1 指定采用的路由模式: hash
@@ -26,6 +27,11 @@ const router = createRouter({
         path: '/login',
         name: 'login',
         component: loginView
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: registerView
       },
     {
       path: '/address',

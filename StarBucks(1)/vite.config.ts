@@ -22,6 +22,18 @@ export default defineConfig({
   }),
   ElementPlus({}),
   ],
+  server: {
+    port: 8080,
+    host: "0.0.0.0",
+    // 反向代理
+    proxy: {
+      "/api": {
+        target: "http://139.155.128.8:5650",// 本地调试
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
