@@ -1,21 +1,18 @@
 <template>
-<<<<<<< HEAD
-<div>这是主页</div>
-</template>
-
-<script lang="ts" setup >
-
-</script>
-
-<style scoped>
-
-</style>
-=======
     <section class="home">
       <section class="swiper">
         <router-link to="register">
           <img
-            src="https://www-static.chinacdn.starbucks.com.cn/prod/assets/images/featured/club_upgrade/banner.jpg"
+            src="https://www.starbucks.com.cn/images/pages/about-careers-top.png"
+            alt
+          />
+        </router-link>
+        <div class="text">广告</div>
+      </section>
+      <section class="swiper">
+        <router-link to="register">
+          <img
+            src="https://artwork.starbucks.com.cn/banners-homepage-banner/main_9b62183b-633a-4dc1-a4a6-627a22cca859.png"
             alt
           />
         </router-link>
@@ -498,4 +495,3 @@
     }
   }
   </style>
->>>>>>> 425e205206fd3ad99eb13099efeafca03c7805d3
