@@ -7,25 +7,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Account: typeof import('./../../src/components/account.vue')['default']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCol: typeof import('element-plus/es')['ElCol']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElMenu: typeof import('element-plus/es')['ElMenu']
-    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
-    ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
-    ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElRow: typeof import('element-plus/es')['ElRow']
-    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    History: typeof import('./../../src/components/history.vue')['default']
-    Home: typeof import('./../../src/components/home.vue')['default']
-    Location: typeof import('./../../src/components/location.vue')['default']
-    Login: typeof import('./../../src/components/login.vue')['default']
-    Register: typeof import('./../../src/components/register.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Shopcart: typeof import('./../../src/components/shopcart.vue')['default']
   }
 }
