@@ -39,9 +39,16 @@ import { useUserStore } from '@/store/user';
 const userStore=useUserStore();
 const visible = ref(false)
 function cancel(){
-    userStore.user='blank';
+userStore.user= { 
+           username:null,
+           password:null
+        };
+
     router.push("/login")
 }
+userStore.$subscribe((mutate,state)=>{
+    localStorage.setItem('user',JSON.stringify(state.user))
+})
 </script>
 
 <style scoped>

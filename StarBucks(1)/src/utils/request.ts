@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 enum MSGS{
   "操作成功"=101,
   "用户名或密码输入不规范"=401,
-  
+  "用户名或密码输入错误"=303
 }
 
 declare module 'axios'{

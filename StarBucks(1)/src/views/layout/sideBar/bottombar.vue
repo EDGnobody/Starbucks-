@@ -5,18 +5,20 @@
 <div v-if="page=='home'" class="home">
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <div >
-        <router-link @click.native="page = 'login'" class="login" to="/login">
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+        @click.native="page = 'login'" class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
-        <router-link @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+         @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-     <div v-else-if="page=='account' || page =='login'|| page =='register'" class="account">
+    <div v-else-if=" page =='login'|| page =='register'||page =='account'" class="account">
       <div class="title">登录或创建一个新帐户 🌟</div>
-      <ul class="list">
-        <li>
+      <ul class="list" :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}">
+        <li >
           <router-link
             @click.native="page = 'login'"
             to="/login"
@@ -48,11 +50,9 @@
 const props=defineProps(['page'])
 const {page}=toRefs(props)
 import { ref, toRefs } from 'vue';
-const picked=ref(false);
-function ifpicked()
-{
+import { useUserStore } from '@/store/user';
+const userStore=useUserStore();
 
-}
 </script>
 
 <style scoped>
