@@ -49,6 +49,7 @@
 <script lang="ts" setup >
 import { reactive, ref } from 'vue';
 import { login } from '@/utils/api'
+import { useRouter } from 'vue-router';
 const userInputing=ref(false);
 const form=reactive({
         username: "",
@@ -56,15 +57,16 @@ const form=reactive({
       })
 const passwordInputing=ref(false)
 const promptVisiable=ref (false)
-// 注册函数
-function register(){
-
-}
+const router=useRouter();
 // 登录函数
 async function  handleLogin() {
    login(form).then(res=>{
-    console.log(res)
+  
+    if(res.data.code==101){
+      router.push("/account")
+    }
    })
+
     }
 </script>
 

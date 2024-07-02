@@ -6,7 +6,7 @@
      <div class="form">
         <!-- 用户名输入框 -->
         <div :class="(userInputing || form.username ?'active ':'')+'user'">
-              <div class="text">用户名或者电子邮箱</div>
+              <div class="text">用户名(长度5-13位)</div>
               <input
                 type="text"
                 v-model="form.username"
@@ -16,7 +16,7 @@
             </div>
             <!-- 密码输入框 -->
         <div :class="(passwordInputing || form.password?'active ':'')+'password'">
-              <div class="text">密码</div>
+              <div class="text">密码(长度5-13位)</div>
               <input
                 type="password"
                 v-model="form.password"
@@ -53,20 +53,27 @@
     
     <script lang="ts" setup >
     import { reactive, ref } from 'vue';
+    import { register } from '@/utils/api';
+import { useRouter } from 'vue-router';
     const userInputing=ref(false);
     const form=reactive({
             username: "",
             password: ""
           })
-    const password=ref('')
+    const password=ref("")
     const passwordInputing=ref(false)
-    const promptVisiable=ref (false)
     const newpasswordInputing=ref(false)
  
-    
+    const router=useRouter();
     // 注册函数
     async function handleRegister(){
-  
+      if(form.username.length==0&&form.password.length!=null&&password.value.length!=null)
+      {
+  if(password.value==form.password){
+  register(form).then(res=>{
+  console.log(res)})
+    } }
+    router.push('/account')
     }
 
 

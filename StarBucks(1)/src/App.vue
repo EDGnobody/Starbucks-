@@ -19,11 +19,12 @@ import { RouterView,RouterLink } from 'vue-router';
 <style scoped>
 .app{
   display: flex;
-
+  height: 100%
 }
 .navigate{
-  height: 100vh;
- width: 30vw;
+  height: 100%;
+ width: 30%;
+ float:left;
  position: absolute;
  left:0;
  top:0;

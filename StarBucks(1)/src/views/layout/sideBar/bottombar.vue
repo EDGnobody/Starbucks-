@@ -37,6 +37,10 @@
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
     
     </div>
+    <div v-else-if="page=='address'" class="home">
+      <div class="title">心情惬意，来杯咖啡吧 ☕</div>
+    
+    </div>
 </div>
 </template>
 
