@@ -2,12 +2,7 @@
 <div>
     <img src="../images/club.png" alt="">
 </div>
-<<<<<<< HEAD
-<!-- 活动展示 -->
-<div>
-=======
 <!-- <div>
->>>>>>> 733b66db707f67a5da62390b394cc2b419c3d05d
     <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
       <h3 text="2xl" justify="center">{{ item }}</h3>
