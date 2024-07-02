@@ -4,7 +4,17 @@
 </template>
 
 <script lang="ts" setup >
-
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const router=useRouter();
+// onMounted(()=>{
+//     const gotoLoginPage = () => {
+//       router.push("/login");
+//     };
+//     if(sessionStorage.getItem("token") == null){
+//       gotoLoginPage()
+//     }
+// })
 </script>
 
 <style scoped>

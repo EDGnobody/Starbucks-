@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup >
-import { reactive, ref } from 'vue';
+import { onMounted, onUpdated, reactive, ref } from 'vue';
 import { login } from '@/utils/api'
 import { useRouter } from 'vue-router';
 const userInputing=ref(false);
@@ -61,12 +61,12 @@ const router=useRouter();
 // 登录函数
 async function  handleLogin() {
    login(form).then(res=>{
-    console.log(res);
-    console.log(res.data)
-    console.log(res.code)
-      router.push("/account")
+  if(res.code==101){
+promptVisiable.value=true;
+console.log(res.code)
+    router.push("/account")
+  }  
    })
-
     }
 </script>
 

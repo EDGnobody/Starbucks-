@@ -4,7 +4,7 @@
   <img class="logo" @click.native="page = 'home'" @click="tohome" style="width: 40px" src="/src/images/logo.png" alt="logo"/>
       <div class="navigateArea">
         <RouterLink @click.native="page = 'address'" to="/address" class="navigate">门店</RouterLink>
-        <RouterLink @click.native="page = 'login'" to="/login" class="navigate">我的账户</RouterLink>
+        <RouterLink @click.native="page = 'login'" to="/account" class="navigate">我的账户</RouterLink>
         <RouterLink @click.native="page = 'store'"to="/store" class="navigate">菜单</RouterLink>
     </div>
   
