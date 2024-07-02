@@ -50,6 +50,8 @@
 import { onMounted, onUpdated, reactive, ref } from 'vue';
 import { login } from '@/utils/api'
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/store/user';
+const userStore=useUserStore();
 const userInputing=ref(false);
 const form=reactive({
         username: "",
@@ -63,7 +65,7 @@ async function  handleLogin() {
    login(form).then(res=>{
   if(res.code==101){
 promptVisiable.value=true;
-console.log(res.code)
+userStore.user=form.username;
     router.push("/account")
   }  
    })

@@ -2,7 +2,8 @@ import axios from "axios";
 import { ElMessage } from 'element-plus'
 enum MSGS{
   "操作成功"=101,
-  "请求异常"
+  "用户名或密码输入不规范"=401,
+  
 }
 
 declare module 'axios'{

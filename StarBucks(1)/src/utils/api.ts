@@ -1,4 +1,5 @@
 import $http from './request';
+// 用户类
 // 用户登录
 export const login =(params:any)=>
     $http(
@@ -21,3 +22,14 @@ export const register =(params:any)=>
                 password: params.password
               }
         })
+
+        export const getUser =(params:any)=>
+            $http(
+                {
+                    url:"/user/userinfo",
+                    method:"post",
+                  
+                })
+
+
+// 咖啡类

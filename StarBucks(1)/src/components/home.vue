@@ -1,4 +1,5 @@
 <template>
+  <div class="main-content">
     <section class="home">
       <section class="swiper">
         <router-link to="register">
@@ -145,12 +146,18 @@
         </p>
       </footer>
     </section>
+  </div>
   </template>
   
   <script setup lang="ts">
+  
 </script>
-  <style scoped >
 
+  <style scoped >
+.main-content{
+  width: 100%;
+  height: auto;
+}
   h3 {
     font-family: "微软雅黑"
   }

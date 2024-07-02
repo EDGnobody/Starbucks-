@@ -55,6 +55,9 @@
     import { reactive, ref } from 'vue';
     import { register } from '@/utils/api';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/store/user';
+import { ElMessage } from 'element-plus';
+const userStore=useUserStore();
     const userInputing=ref(false);
     const form=reactive({
             username: "",
@@ -63,20 +66,23 @@ import { useRouter } from 'vue-router';
     const password=ref("")
     const passwordInputing=ref(false)
     const newpasswordInputing=ref(false)
- 
     const router=useRouter();
     // 注册函数
-    async function handleRegister(){
-      if(form.username.length==0&&form.password.length!=null&&password.value.length!=null)
-      {
+function handleRegister(){
+  if(form.username.length!=0&&form.password.length!=0){
   if(password.value==form.password){
-  register(form).then(res=>{
-  console.log(res)})
+  register(form).then(res=>{  
+  console.log(res)
+       userStore.user=form.username;
+     router.push('/account')
+    
+})
+    }else{
+      console.log(8888)
+      ElMessage.error('两次输入密码不一致')
     } }
-    router.push('/account')
-    }
-
-
+  }
+    
     </script>
     
     <style scoped>
