@@ -2,11 +2,44 @@
 <div>
     <img src="../images/club.png" alt="">
 </div>
+<<<<<<< HEAD
 <!-- 活动展示 -->
 <div>
+=======
+<!-- <div>
+>>>>>>> 733b66db707f67a5da62390b394cc2b419c3d05d
     <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6" :key="item">
       <h3 text="2xl" justify="center">{{ item }}</h3>
+    </el-carousel-item>
+  </el-carousel>
+</div> -->
+<!-- <div>
+  <el-carousel :interval="4000" type="card" height="200px">
+    <el-carousel-item v-for="item in 6" :key="item">
+      <img :src="'../assets/shopcart-carousel-${item}.png'" style="width: 100%; height: 200px;">
+    </el-carousel-item>
+  </el-carousel>
+</div> -->
+<div>
+  <el-carousel :interval="4000" type="card" height="300px">
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-1.png" style="width: 100%; height: 300px;">
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-2.png" style="width: 100%; height: 300px;">
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-3.png" style="width: 100%; height: 300px;">
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-4.png" style="width: 100%; height: 300px;">
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-5.png" style="width: 100%; height: 300px;">
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../assets/shopcart-carousel-6.png" style="width: 100%; height: 300px;">
     </el-carousel-item>
   </el-carousel>
 </div>
