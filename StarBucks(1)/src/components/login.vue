@@ -61,10 +61,10 @@ const router=useRouter();
 // 登录函数
 async function  handleLogin() {
    login(form).then(res=>{
-  
-    if(res.data.code==101){
+    console.log(res);
+    console.log(res.data)
+    console.log(res.code)
       router.push("/account")
-    }
    })
 
     }

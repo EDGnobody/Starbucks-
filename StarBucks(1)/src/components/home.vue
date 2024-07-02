@@ -1,16 +1,4 @@
 <template>
-<<<<<<< HEAD
-<div>这是主页</div>
-</template>
-
-<script lang="ts" setup >
-
-</script>
-
-<style scoped>
-
-</style>
-=======
     <section class="home">
       <section class="swiper">
         <router-link to="register">
@@ -159,7 +147,9 @@
     </section>
   </template>
   
-  <style scoped lang="less">
+  <script setup lang="ts">
+</script>
+  <style scoped >
 
   h3 {
     font-family: "微软雅黑"
@@ -518,4 +508,3 @@
     }
   }
   </style>
->>>>>>> 1c59d483701decf75d1083eeb41fe53416e2bcc8

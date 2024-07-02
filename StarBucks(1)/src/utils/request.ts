@@ -1,10 +1,15 @@
 import axios from "axios";
 import { ElMessage } from 'element-plus'
 enum MSGS{
-  "操作成功"=200,
+  "操作成功"=101,
   "请求异常"
 }
 
+declare module 'axios'{
+interface AxiosInstance{
+  (config:AxiosRequestConfig):Promise<any>
+}
+}
 const $http = axios.create({
   baseURL: "/api",
   timeout: 1000,
