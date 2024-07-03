@@ -1,6 +1,7 @@
 
 <template>
     <section class="home">
+
       <section class="swiper">
         <router-link to="register">
           <img
@@ -9,14 +10,17 @@
         </router-link>
         <div class="text">广告</div>
       </section>
-      <section class="swiper">
-        <router-link to="register">
-          <img
-            src="../assets/homepage-banner.png"
-          />
-        </router-link>
-        <div class="text">广告</div>
-      </section>
+<!-- 
+            <section class="swiper">
+              <router-link to="register">
+                <img
+                  src="../assets/homepage-banner.png"
+                />
+              </router-link>
+              <div class="text">广告</div>
+            </section> -->
+
+
       <section class="tags">
         <div class="wrapper">
           <div class="tag">
@@ -135,16 +139,7 @@
           </div>
         </div>
       </section>
-      <footer>
-        <p>
-          <a href="#">
-            <img
-              src="../assets/icpicon.png"
-            /> 沪公网安备 31010402000253号
-          </a>|
-          <a href="#">沪ICP备17003747号</a>
-        </p>
-      </footer>
+  
     </section>
   </template>
   
