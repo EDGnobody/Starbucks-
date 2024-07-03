@@ -15,24 +15,24 @@
   </el-carousel>
 </div> -->
 <div>
-  <el-carousel :interval="4000" type="card" height="300px">
+  <el-carousel :interval="4000" type="card" width="100%" height="200px">
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-1.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-1.png" style="width: 100%;">
     </el-carousel-item>
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-2.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-2.png" style="width: 100%;">
     </el-carousel-item>
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-3.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-3.png" style="width: 100%;">
     </el-carousel-item>
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-4.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-4.png" style="width: 100%;">
     </el-carousel-item>
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-5.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-5.png" style="width: 100%;">
     </el-carousel-item>
     <el-carousel-item>
-      <img src="../assets/shopcart-carousel-6.png" style="width: 100%; height: 300px;">
+      <img src="../assets/shopcart-carousel-6.png" style="width: 100%;">
     </el-carousel-item>
   </el-carousel>
 </div>

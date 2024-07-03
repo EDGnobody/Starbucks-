@@ -4,8 +4,9 @@
 <!-- 首页侧边栏 -->
 <div v-if="page=='home'" class="home">
 
-      <div class="title" id="messageDiv"></div>
+      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">{{ message }}</div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
+      <br>
       <div >
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
         @click.native="page = 'login'" class="login" to="/login">
@@ -14,7 +15,9 @@
         </router-link>
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
          @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
-
+         <br>
+        <hr>
+        <!-- <img src="https://www.starbucks.com.cn/assets/icons/icon-heart.svg"  /> -->
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
@@ -101,8 +104,8 @@ const activeNames = ref(['1'])
 const handleChange = (val: string[]) => {
   console.log(val)
 }
-const message = `欢迎回来, ${userStore.user.username}`;
-document.getElementById('messageDiv').textContent = message;
+const message = `欢迎回来, ${userStore.user.username}🌟`;
+// document.getElementById('messageDiv').text = message;
 </script>
 
 <style scoped>
