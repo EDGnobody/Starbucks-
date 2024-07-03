@@ -65,8 +65,8 @@ async function  handleLogin() {
    login(form).then(res=>{
   if(res.code==101){
       promptVisiable.value=true;
-      console.log(form.username)
-      userStore.setLoginInfo(form.username,res.data)
+      userStore.setLoginInfo(form.username,res.data.token,res.data.root)
+      console.log(userStore.user.username)
       router.push("/account")
      }  
    })

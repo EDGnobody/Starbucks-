@@ -1,11 +1,11 @@
 <template>
   <div  class="sidebar">
     <div class="menu">
-  <img class="logo" @click.native="page = 'home'" @click="tohome" style="width: 40px" src="/src/images/logo.png" alt="logo"/>
+  <img class="logo" @click="changePage('home')"  style="width: 40px" src="/src/images/logo.png" alt="logo"/>
       <div class="navigateArea">
-        <RouterLink @click="show" @click.native="page = 'address'" to="/address" class="navigate">门店</RouterLink>
-        <RouterLink @click.native="page = 'login'"  :to="(userStore.user.username==null? '/login':'/account' )" class="navigate">我的账户</RouterLink>
-        <RouterLink @click.native="page = 'store'"to="/store" class="navigate">菜单</RouterLink>
+        <RouterLink @click="changePage('address')" to="/address" class="navigate">门店</RouterLink>
+        <RouterLink @click="changePage('login')"  :to="(userStore.user.username==''? '/login':'/account' )" class="navigate">我的账户</RouterLink>
+        <RouterLink @click="changePage('store')" to="/store" class="navigate">菜单</RouterLink>
     </div>
   
     <a  class="nav-menu" >
@@ -14,25 +14,29 @@
         />
       </a>
 </div>
-  <bottombar :page="page"/>
+  <bottombar />
 </div>
 </template>
 
 <script lang="ts" setup>
 import bottombar from './bottombar.vue'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/user';
+import { usePageStore } from '@/store/page';
 const userStore=useUserStore();
 const router=useRouter();
-const page=ref('home')
-function tohome(){
- router.push('/')
+const pageStore=usePageStore();
+// 切换不同的侧边栏
+function changePage(value:any){
+  pageStore.setPage(value)
+  if(value=='home'){
+    router.push('/')
+  }
 }
-function show(){
-  console.log(router)
-}
+onMounted(()=>{
 
+      })
 </script>
 <style scoped>
 .sidebar{

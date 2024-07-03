@@ -2,92 +2,53 @@
 <div class="showarea">
 
 <!-- 首页侧边栏 -->
-<div v-if="page=='home'" class="home">
-      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
+<div v-if="pageStore.page=='home'" class="home">
+      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <hr>
       
       <div >
-        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
-        @click.native="page = 'login'" class="login" to="/login">
+        <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
+        @click.native="pageStore.page = 'login'" class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
-        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
-         @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+        <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
+         @click.native="pageStore.page = 'register'" class="reg" to="/register">注册</router-link>
          <br>
-<<<<<<< HEAD
-=======
-        <hr>
-      
->>>>>>> b48be289ad7828b055b211ce8652f9815068157d
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-    <div v-else-if=" page =='login'|| page =='register'||page =='account'||page=='store'" class="account">
-      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
+    <div v-else-if=" pageStore.page =='login'|| pageStore.page =='register'||pageStore.page =='account'||pageStore.page=='store'" class="account">
+      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
   
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <hr>
-      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
+      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
       <div >
-        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
-        @click.native="page = 'login'" class="login" to="/login">
+        <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
+        @click.native="pageStore.page = 'login'" class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
-        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
-         @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+        <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
+         @click.native="pageStore.page = 'register'" class="reg" to="/register">注册</router-link>
       </div>
       
     </div>
 <!-- 菜单侧边栏 -->
-<div v-else-if="page=='address'" >
+<div v-else-if="pageStore.page=='address'" >
   <div class="demo-collapse">
     <el-collapse v-model="activeNames" @change="handleChange">
-
-      <el-collapse-item title="店家1" name="1" >
+      <el-collapse-item v-for="item in storeList" :key="item.id" :title="item.name" :name="item.name" >
         <el-descriptions >
-    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
+    <el-descriptions-item label="店名">{{item.name}}</el-descriptions-item>
   </el-descriptions>
   <el-descriptions >
-    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
+    <el-descriptions-item label="电话号码">{{ item.phone }}</el-descriptions-item>
   </el-descriptions>
   <el-descriptions >
-    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
-  </el-descriptions>
-      </el-collapse-item>
-      <el-collapse-item title="店家2" name="2">
-        <el-descriptions >
-    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
-  </el-descriptions>
-      </el-collapse-item>
-      <el-collapse-item title="店家3" name="3">
-        <el-descriptions >
-    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
-  </el-descriptions>
-      </el-collapse-item>
-      <el-collapse-item title="店家4" name="4">
-        <el-descriptions >
-    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
-  </el-descriptions>
-  <el-descriptions >
-    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
+    <el-descriptions-item label="地址">{{ item.location }}</el-descriptions-item>
   </el-descriptions>
       </el-collapse-item>
     </el-collapse>
@@ -103,16 +64,24 @@
 <script lang="ts" setup name="bottombar">
 
 const props=defineProps(['page'])
-const {page}=toRefs(props)
-import { ref, toRefs } from 'vue';
+import { onMounted, ref, toRefs } from 'vue';
 import { useUserStore } from '@/store/user';
+import { getCoffeeList, getStoreList } from '@/utils/api';
+import { usePageStore } from '@/store/page';
+const pageStore=usePageStore();
 const userStore=useUserStore();
 const activeNames = ref(['1'])
 const handleChange = (val: string[]) => {
-  console.log(val)
+  
 }
-const message = `欢迎回来, ${localStorage.getItem('username')}🌟`;
+var storeList:any=[]
+onMounted(()=>{
 
+        getStoreList().then(res=>{
+          storeList=res.data
+        });
+        
+      })
 </script>
 
 <style scoped>
