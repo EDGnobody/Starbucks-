@@ -13,7 +13,7 @@
     <template #reference>
       <el-avatar :size="60"  >
       <img
-        src="../images/coffee.png"
+        src="../images/avatar-01.jpg"
       />
     </el-avatar>
     </template>
@@ -27,6 +27,9 @@
   <el-card class="card" style="width: 700px;margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
+
+
+
   </el-card>
 
  </div>
@@ -38,16 +41,27 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
+import { getOrderList } from '@/utils/api';
 const userStore=useUserStore();
-const visible = ref(false)
+// 退出登录功能
+
 function cancel(){
   userStore.setLoginInfo(null,null)
-
     router.push("/login")
 }
-userStore.$subscribe((mutate,state)=>{
-    localStorage.setItem('user',JSON.stringify(state.user))
-})
+function change(){
+
+}
+// 获取历史订单信息
+
+// 挂载
+onMounted(()=>{
+  getOrderList().then(res=>{
+  if(res.data.code==101){
+     console.log(res.data)
+     }  
+   })
+      })
 </script>
 
 <style scoped>

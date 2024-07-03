@@ -88,3 +88,14 @@ export const createStore =(params:any)=>
                     longitude:params.longitude
               }
         })
+// 订单信息
+// 获取历史订单
+export const getOrderList =()=>
+    $http(
+        {
+            url:"/order/get_by_user_id",
+            method:"get",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            }
+        })
