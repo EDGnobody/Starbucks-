@@ -3,10 +3,10 @@
 
 <!-- 首页侧边栏 -->
 <div v-if="page=='home'" class="home">
-
-      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">{{ message }}</div>
+      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
-      <br>
+      <hr>
+      
       <div >
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
         @click.native="page = 'login'" class="login" to="/login">
@@ -16,13 +16,19 @@
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
          @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
          <br>
+<<<<<<< HEAD
+=======
         <hr>
       
+>>>>>>> b48be289ad7828b055b211ce8652f9815068157d
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
     <div v-else-if=" page =='login'|| page =='register'||page =='account'||page=='store'" class="account">
+      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
+  
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
+      <hr>
       <div class="title" :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
       <div >
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
@@ -33,6 +39,7 @@
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
          @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
       </div>
+      
     </div>
 <!-- 菜单侧边栏 -->
 <div v-else-if="page=='address'" >
@@ -104,8 +111,8 @@ const activeNames = ref(['1'])
 const handleChange = (val: string[]) => {
   console.log(val)
 }
-const message = `欢迎回来, ${userStore.user.username}🌟`;
-// document.getElementById('messageDiv').text = message;
+const message = `欢迎回来, ${localStorage.getItem('username')}🌟`;
+
 </script>
 
 <style scoped>
@@ -140,7 +147,7 @@ text-decoration: none;
 }
 .home{
 position: absolute;
-top:350px;
+top:270px;
 left: 80px;
 }
 .account{
