@@ -41,10 +41,7 @@ import { useUserStore } from '@/store/user';
 const userStore=useUserStore();
 const visible = ref(false)
 function cancel(){
-userStore.user= { 
-           username:null,
-           password:null
-        };
+  userStore.setLoginInfo(null,null)
 
     router.push("/login")
 }

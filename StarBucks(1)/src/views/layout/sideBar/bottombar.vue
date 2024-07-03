@@ -12,7 +12,6 @@
         </router-link>
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
          @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
-
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->

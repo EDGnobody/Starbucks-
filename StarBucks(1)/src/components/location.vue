@@ -14,7 +14,7 @@
         
         var map = new window.TMap.Map(document.getElementById('container'), {
             center: center,//设置地图中心点坐标
-            zoom: 7.2,   //设置地图缩放级别
+            zoom: 15,   //设置地图缩放级别
         });
   
         //获取缩放控件
