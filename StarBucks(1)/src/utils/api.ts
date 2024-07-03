@@ -59,3 +59,32 @@ export const createCoffee =(params:any)=>
                       }
                 })
         
+
+// 店铺类
+// 获取店面信息列表
+export const getStoreList =()=>
+    $http(
+        {
+            url:"/store/get_store_list",
+            method:"get",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            }
+        })
+// 添加店面信息
+export const createStore =(params:any)=>
+    $http(
+        {
+            url:"/store/add",
+            method:"post",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            },
+            params: {
+                    name: params.name,
+                    location:params.location,
+                    phone: params.phone,
+                    latitude:params.latitude,
+                    longitude:params.longitude
+              }
+        })
