@@ -1,6 +1,7 @@
 
 <template>
     <section class="home">
+
       <section class="swiper">
         <router-link to="register">
           <img
@@ -9,18 +10,21 @@
         </router-link>
         <div class="text">广告</div>
       </section>
-      <section class="swiper">
-        <router-link to="register">
-          <img
-            src="../assets/homepage-banner.png"
-          />
-        </router-link>
-        <div class="text">广告</div>
-      </section>
+<!-- 
+            <section class="swiper">
+              <router-link to="register">
+                <img
+                  src="../assets/homepage-banner.png"
+                />
+              </router-link>
+              <div class="text">广告</div>
+            </section> -->
+
+
       <section class="tags">
         <div class="wrapper">
           <div class="tag">
-            <a href="#">
+            <a href="https://starbucks.tmall.com/">
               <img
                 src="../assets/tmall.png"
               />
@@ -67,7 +71,7 @@
         <p class="text">在星巴克天猫旗舰店发现更多咖啡心意</p>
         <div class="wrapper">
           <div class="tag">
-            <a href="#">
+            <a href="https://starbucks.tmall.com/p/rd796757.htm">
               <img
                 src="../assets/tmall-card.png"
                 class="logo"
@@ -79,7 +83,7 @@
             </a>
           </div>
           <div class="tag">
-            <a href="#">
+            <a href="https://starbucks.tmall.com/p/rd796757.htm">
               <img
                 src="../assets/tmall-card-02.png"
                 class="logo"
@@ -91,7 +95,7 @@
             </a>
           </div>
           <div class="tag">
-            <a href="#">
+            <a href="https://starbucks.tmall.com/p/rd796757.htm">
               <img
                 src="../assets/tmall-card-03.png"
                 class="logo"
@@ -103,7 +107,7 @@
             </a>
           </div>
           <div class="tag">
-            <a href="#">
+            <a href="https://starbucks.tmall.com/p/rd796757.htm">
               <img
                 src="../assets/tmall-card-04.png"
                 class="logo"
@@ -135,6 +139,7 @@
           </div>
         </div>
       </section>
+  
       
     </section>
   </template>
