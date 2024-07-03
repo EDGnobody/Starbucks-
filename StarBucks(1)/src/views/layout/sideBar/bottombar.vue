@@ -15,12 +15,9 @@
         </router-link>
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
          @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
-<<<<<<< HEAD
-=======
          <br>
         <hr>
-        <!-- <img src="https://www.starbucks.com.cn/assets/icons/icon-heart.svg"  /> -->
->>>>>>> a0c45c50328913d944b136fa15edc4e3d3726e9b
+      
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
