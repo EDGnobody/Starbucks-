@@ -33,3 +33,21 @@ export const register =(params:any)=>
 
 
 // 咖啡类
+// 获取咖啡列表
+export const getCoffeeList =()=>
+    $http(
+        {
+            url:"/coffee/get_coffee_list",
+            method:"get",
+        })
+// 创建新的咖啡商品
+export const createCoffee =(params:any)=>
+            $http(
+                {
+                    url:"/coffee/create",
+                    method:"post",
+                    params: {
+                        
+                      }
+                })
+        

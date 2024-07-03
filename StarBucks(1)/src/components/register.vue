@@ -73,7 +73,10 @@ function handleRegister(){
   if(password.value==form.password){
   register(form).then(res=>{  
   console.log(res)
-       userStore.user=form.username;
+       userStore.user= { 
+           username:form.username,
+           password:form.password
+        };
      router.push('/account')
     
 })
@@ -82,7 +85,10 @@ function handleRegister(){
       ElMessage.error('两次输入密码不一致')
     } }
   }
-    
+  // 用户信息存入浏览器
+  userStore.$subscribe((mutate,state)=>{
+    localStorage.setItem('user',JSON.stringify(state.user))
+})
     </script>
     
     <style scoped>

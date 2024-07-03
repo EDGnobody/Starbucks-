@@ -65,11 +65,18 @@ async function  handleLogin() {
    login(form).then(res=>{
   if(res.code==101){
 promptVisiable.value=true;
-userStore.user=form.username;
+userStore.user= { 
+           username:form.username,
+           password:form.password
+        };
     router.push("/account")
   }  
    })
     }
+    // 存入浏览器
+    userStore.$subscribe((mutate,state)=>{
+    localStorage.setItem('user',JSON.stringify(state.user))
+})
 </script>
 
 <style scoped>

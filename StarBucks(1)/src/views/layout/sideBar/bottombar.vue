@@ -3,41 +3,87 @@
 
 <!-- 首页侧边栏 -->
 <div v-if="page=='home'" class="home">
+
+      <div class="title" id="messageDiv"></div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <div >
-        <router-link @click.native="page = 'login'" class="login" to="/login">
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+        @click.native="page = 'login'" class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
-        <router-link @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+         @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-     <div v-else-if="page=='account' || page =='login'|| page =='register'" class="account">
-      <div class="title">登录或创建一个新帐户 🌟</div>
-      <ul class="list">
-        <li>
-          <router-link
-            @click.native="page = 'login'"
-            to="/login"
-            :class="page == 'login'?'active':''"
-          >登录</router-link>
-        </li>
-        <li>
-          <router-link
-            @click.native="page = 'register'"
-            to="/register"
-            :class="page == 'register'?'active':''"
-          >注册</router-link>
-        </li>
-      </ul>
+    <div v-else-if=" page =='login'|| page =='register'||page =='account'" class="account">
+      <div class="title" :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
+      <div >
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+        @click.native="page = 'login'" class="login" to="/login">
+          <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
+          <span>登录</span>
+        </router-link>
+        <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
+         @click.native="page = 'register'" class="reg" to="/register">注册</router-link>
+      </div>
     </div>
 <!-- 菜单侧边栏 -->
-<div v-else-if="page=='store'" class="home">
-      <div class="title">心情惬意，来杯咖啡吧 ☕</div>
+<div v-else-if="page=='address'" >
+  <div class="demo-collapse">
+    <el-collapse v-model="activeNames" @change="handleChange">
+
+      <el-collapse-item title="店家1" name="1" >
+        <el-descriptions >
+    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
+  </el-descriptions>
+      </el-collapse-item>
+      <el-collapse-item title="店家2" name="2">
+        <el-descriptions >
+    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
+  </el-descriptions>
+      </el-collapse-item>
+      <el-collapse-item title="店家3" name="3">
+        <el-descriptions >
+    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
+  </el-descriptions>
+      </el-collapse-item>
+      <el-collapse-item title="店家4" name="4">
+        <el-descriptions >
+    <el-descriptions-item label="店名">喜茶</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="电话号码">18100000000</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="地址">湖北省武汉市洪山区光谷世界城</el-descriptions-item>
+  </el-descriptions>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
     
     </div>
-    <div v-else-if="page=='address'" class="home">
+    <div v-else-if="page=='store'" class="home">
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
     
     </div>
@@ -45,14 +91,18 @@
 </template>
 
 <script lang="ts" setup name="bottombar">
+
 const props=defineProps(['page'])
 const {page}=toRefs(props)
 import { ref, toRefs } from 'vue';
-const picked=ref(false);
-function ifpicked()
-{
-
+import { useUserStore } from '@/store/user';
+const userStore=useUserStore();
+const activeNames = ref(['1'])
+const handleChange = (val: string[]) => {
+  console.log(val)
 }
+const message = `欢迎回来, ${userStore.user.username}`;
+document.getElementById('messageDiv').textContent = message;
 </script>
 
 <style scoped>
