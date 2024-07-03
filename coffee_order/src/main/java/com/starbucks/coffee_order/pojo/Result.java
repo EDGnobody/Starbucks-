@@ -9,19 +9,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Result<T>{
-    private Integer code;//响应状态码
-    private String message;//响应信息
-    private T data;//返回数据
+
+    private ResultResponse<T> data;
+
+    public static Result<String> success(){
+        return new Result<String>(ResultResponse.success());
+    }
 
     public static <E> Result<E> success(E data){
-        return new Result<>(101, "操作成功", data);
+        return new Result<E>(ResultResponse.success(data));
     }
 
-    public static Result success(){
-        return new Result<>(101, "操作成功", null);
+    public static Result<String> error(Integer code, String message){
+        return new Result<String>(ResultResponse.error(code, message));
     }
 
-    public static Result error(Integer error_code,String error_message){
-        return new Result<>(error_code, error_message, null);
+    public static <E> Result<E> error(Integer code, String message, E data){
+        return new Result<E>(ResultResponse.error(code, message, data));
     }
+
 }

@@ -4,8 +4,13 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/coffee_order
-    username: root
-    password: 2004
+    username: coffee_order
+    password: 200499
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.starbucks.coffee_order.pojo
+  configuration:
+    map-underscore-to-camel-case: true

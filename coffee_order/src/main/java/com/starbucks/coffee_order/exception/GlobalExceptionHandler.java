@@ -1,7 +1,6 @@
 package com.starbucks.coffee_order.exception;
 
 import com.starbucks.coffee_order.pojo.Result;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
