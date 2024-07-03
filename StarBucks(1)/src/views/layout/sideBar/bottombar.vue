@@ -21,7 +21,8 @@
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-    <div v-else-if=" page =='login'|| page =='register'||page =='account'" class="account">
+    <div v-else-if=" page =='login'|| page =='register'||page =='account'||page=='store'" class="account">
+      <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <div class="title" :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
       <div >
         <router-link :style="{'visibility': (userStore.user.username==null ? 'visible' : 'hidden')}"
@@ -84,12 +85,11 @@
       </el-collapse-item>
     </el-collapse>
   </div>
-    
     </div>
-    <div v-else-if="page=='store'" class="home">
+    <!-- <div v-else-if="page=='store'" class="home">
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
     
-    </div>
+    </div> -->
 </div>
 </template>
 
