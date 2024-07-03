@@ -53,7 +53,7 @@
     
     <script lang="ts" setup >
     import { reactive, ref } from 'vue';
-    import { register } from '@/utils/api';
+    import { register ,login} from '@/utils/api';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/user';
 import { ElMessage } from 'element-plus';
@@ -72,12 +72,14 @@ function handleRegister(){
   if(form.username.length!=0&&form.password.length!=0){
   if(password.value==form.password){
   register(form).then(res=>{  
-  console.log(res)
-       userStore.user= { 
-           username:form.username,
-           password:form.password
-        };
-     router.push('/account')
+  if(res.data==101){
+    login(form).then(res=>{
+  if(res.code==101){
+      userStore.setLoginInfo(form.username,res.data)
+      router.push("/account")
+     }  
+   })
+     }
     
 })
     }else{

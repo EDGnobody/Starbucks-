@@ -39,6 +39,9 @@ export const getCoffeeList =()=>
         {
             url:"/coffee/get_coffee_list",
             method:"get",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            }
         })
 // 创建新的咖啡商品
 export const createCoffee =(params:any)=>
@@ -46,8 +49,13 @@ export const createCoffee =(params:any)=>
                 {
                     url:"/coffee/create",
                     method:"post",
+                    headers:{
+                        "Authorization":localStorage.getItem('token')
+                    },
                     params: {
-                        
+                        name: params.name,
+                        price:params.price,
+                        category: params.category
                       }
                 })
         

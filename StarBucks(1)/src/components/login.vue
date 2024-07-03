@@ -64,19 +64,14 @@ const router=useRouter();
 async function  handleLogin() {
    login(form).then(res=>{
   if(res.code==101){
-promptVisiable.value=true;
-userStore.user= { 
-           username:form.username,
-           password:form.password
-        };
-    router.push("/account")
-  }  
+      promptVisiable.value=true;
+      console.log(form.username)
+      userStore.setLoginInfo(form.username,res.data)
+      router.push("/account")
+     }  
    })
-    }
-    // 存入浏览器
-    userStore.$subscribe((mutate,state)=>{
-    localStorage.setItem('user',JSON.stringify(state.user))
-})
+  }
+ 
 </script>
 
 <style scoped>
