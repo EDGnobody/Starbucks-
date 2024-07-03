@@ -11,9 +11,11 @@
       </el-button>
     </div>
     <template #reference>
-      <el-avatar
-        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      <el-avatar :size="60"  >
+      <img
+        src="../images/coffee.png"
       />
+    </el-avatar>
     </template>
   </el-popover>
     </template>

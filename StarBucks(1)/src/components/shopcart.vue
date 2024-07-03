@@ -37,27 +37,58 @@
   </el-carousel>
 </div>
 <!-- 菜单 -->
-<div>
-<el-row :gutter="20">
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-  </el-row>
-  <el-row :gutter="20">
-    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="7"><img src="../images/coffee.png" alt=""></el-col>
-   
-  </el-row>
-  <el-row :gutter="20">
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-    <el-col :span="6"><img src="../images/coffee.png" alt=""></el-col>
-  </el-row>
-  </div>
- 
+ <div style="margin-top:30px">
+  <h2>咖啡</h2>
+  <hr>
+<el-space wrap>
+    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+      <template #header>
+        <div class="card-header">
+          <span>Card name</span>
+          <el-button class="button" text>Operation button</el-button>
+        </div>
+      </template>
+      <div v-for="o in 4" :key="o" class="text item">
+        {{ 'List item ' + o }}
+      </div>
+    </el-card>
+  </el-space>
+</div>
+<div style="margin-top:30px">
+  <h2>果茶</h2>
+  <hr>
+<el-space wrap>
+    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+      <template #header>
+        <div class="card-header">
+          <span>Card name</span>
+          <el-button class="button" text>Operation button</el-button>
+        </div>
+      </template>
+      <div v-for="o in 4" :key="o" class="text item">
+        {{ 'List item ' + o }}
+      </div>
+    </el-card>
+  </el-space>
+</div>
+<div style="margin-top:30px">
+  <h2>奶茶</h2>
+  <hr>
+<el-space wrap>
+    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+      <template #header>
+        <div class="card-header">
+          <span>Card name</span>
+          <el-button class="button" text>Operation button</el-button>
+        </div>
+      </template>
+      <div v-for="o in 4" :key="o" class="text item">
+        {{ 'List item ' + o }}
+      </div>
+    </el-card>
+  </el-space>
+</div>
+
 </template>
 
 <script lang="ts" setup >
