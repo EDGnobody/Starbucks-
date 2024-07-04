@@ -72,9 +72,11 @@ function handleRegister(){
   if(form.username.length!=0&&form.password.length!=0){
   if(password.value==form.password){
   register(form).then(res=>{  
-  if(res.data==101){
+  if(res.code==101){
+    console.log(777)
     login(form).then(res=>{
   if(res.code==101){
+    console.log(777)
       userStore.setLoginInfo(form.username,res.data.token,res.data.root)
       router.push("/account")
      }  

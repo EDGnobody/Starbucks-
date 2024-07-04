@@ -243,9 +243,9 @@ var form=
 }
 console.log(form)
   if(orderList.storeName!=''&&orderList.items.length!=0){
-  createOrder(form).then(res=>{
-    console.log(res)  
-  if(res.data==101){
+  createOrder(form).then(res=>{ 
+    console.log(res.data)
+  if(res.code==101){
     ElMessage({
     message: '下单成功',
     type: 'success',
