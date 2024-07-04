@@ -4,17 +4,17 @@
     <el-card class="card" style="width: 700px">
     <template #header>
         <!-- 用户信息框 -->
-        <el-popover  placement="top" trigger="click" :width="160">
-    <div style="text-align: right; margin: 0">
+        <el-popover  placement="top" trigger="click" :width="200">
+    <div class="user-info">
       <el-button size="small" type="primary" @click="cancel">
         退出登录
       </el-button>
+      <el-button size="small" type="primary" @click="change()">
+        切换头像
+      </el-button>
     </div>
     <template #reference>
-      <el-avatar :size="60"  >
-      <img
-        src="../images/avatar-01.jpg"
-      />
+      <el-avatar :size="60"  :src="avatars[item]">
     </el-avatar>
     </template>
   </el-popover>
@@ -39,21 +39,33 @@
 </template>
 
 <script lang="ts" setup >
+
+
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
 // import { getOrderList } from '@/utils/api';
 const userStore=useUserStore();
-// 退出登录功能
+var avatars = ref([
 
+  "./images/avatar-01.jpg",
+  "./images/avatar-02.jpg",
+  "./images/avatar-03.jpg",
+  "./images/avatar-04.jpg",
+  "./images/avatar-05.jpg",
+]);
+
+// 退出登录功能
+let item=ref(1);
 function cancel(){
   userStore.setLoginInfo('','',0)
   console.log(userStore.user.username=='')
     router.push("/login")
 }
-function change(){
 
+function change(){
+  item.value=(item.value+1) % 5;
 }
 
 // 挂载
@@ -85,5 +97,12 @@ function change(){
 }
 .h1{
     font-size: larger
+}
+.user-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* style="text-align: right; margin: 0" */
 }
 </style>
