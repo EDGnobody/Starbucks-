@@ -1,14 +1,16 @@
 package com.starbucks.coffee_order.service.Impl;
 
 import com.starbucks.coffee_order.mapper.OrderMapper;
-import com.starbucks.coffee_order.pojo.Coffee;
-import com.starbucks.coffee_order.pojo.Order;
-import com.starbucks.coffee_order.pojo.OrderItem;
+import com.starbucks.coffee_order.pojo.*;
 import com.starbucks.coffee_order.service.OrderService;
 import com.starbucks.coffee_order.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,11 +26,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(List<OrderItem> orderList) {
+    public Order createOrder(OrderRequest orderRequest) {
         Order order = new Order();
+        List<OrderItem> orderList = orderRequest.getItems();
         Map<String,Object> map = ThreadLocalUtil.get();
         Integer userId = (Integer) map.get("id");
         order.setUserId(userId);
+        order.setStoreName(orderRequest.getStoreName());
+        order.setOrderDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         ordermapper.createOrder(order);
         Integer orderId = order.getId();
         int totalPrice = 0;
@@ -48,11 +53,39 @@ public class OrderServiceImpl implements OrderService {
             ordermapper.addOrderItem(orderItem);
             totalPrice += price * quantity;
         }
-        System.out.println(orderId);
         ordermapper.changeTotalPrice(orderId,totalPrice);
-        System.out.println(orderId);
         order.setTotalPrice(totalPrice);
         return order;
+    }
+
+    @Override
+    public List<OrderReturn> findByUserId(Integer userId) {
+        List<Order> order_list = ordermapper.getByUserId(userId);
+        List<OrderReturn> orderReturnList = new ArrayList<>();
+        for (Order order : order_list) {
+            System.out.println(order.toString());
+            OrderReturn orderReturn = new OrderReturn();
+            orderReturn.setOrder(order);
+            List<OrderItem> orderItems = ordermapper.findByOrderId(order.getId());
+            orderReturn.setOrderItems(orderItems);
+            orderReturnList.add(orderReturn);
+        }
+        return orderReturnList;
+    }
+
+    @Override
+    public void setOrderCompleted(Integer orderId) {
+        ordermapper.setOrderCompleted(orderId);
+    }
+
+    @Override
+    public void setOrderCancelled(Integer orderId) {
+        ordermapper.setOrderCancelled(orderId);
+    }
+
+    @Override
+    public Store findStore(String storeName) {
+        return ordermapper.findStore(storeName);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.starbucks.coffee_order.service.Impl;
 
 import com.starbucks.coffee_order.mapper.UserMapper;
+import com.starbucks.coffee_order.pojo.UserUpdate;
 import com.starbucks.coffee_order.service.UserService;
 import com.starbucks.coffee_order.utils.Md5Util;
 import com.starbucks.coffee_order.pojo.User;
@@ -35,9 +36,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user){
-        user.setUpdateTime(LocalDateTime.now());
-        usermapper.update(user);
+    public void update(UserUpdate userupdate){
+        Map<String,Object> claims = ThreadLocalUtil.get();
+        Integer id = (Integer) claims.get("id");
+        User user = usermapper.findById(id);
+        if(user == null){
+            throw new RuntimeException("用户名不存在");
+        }
+        if(userupdate.getUsername()==null)
+        {
+            userupdate.setUsername(user.getUsername());
+        }
+        if(userupdate.getNickname()==null)
+        {
+            userupdate.setNickname(user.getNickname());
+        }
+        usermapper.update(userupdate);
     }
 
     @Override

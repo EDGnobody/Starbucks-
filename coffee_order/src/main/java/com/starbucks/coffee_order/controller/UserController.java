@@ -1,6 +1,8 @@
 package com.starbucks.coffee_order.controller;
 
 import com.starbucks.coffee_order.pojo.Result;
+import com.starbucks.coffee_order.pojo.Token;
+import com.starbucks.coffee_order.pojo.UserUpdate;
 import com.starbucks.coffee_order.service.UserService;
 import com.starbucks.coffee_order.pojo.User;
 import com.starbucks.coffee_order.utils.JwtUtil;
@@ -43,13 +45,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result<String> login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password){
+    public Result<Token> login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password){
 
         //首先查找用户
         User u = userservice.findByUsername(username);
         if(u == null)
         {
-            return Result.error(302,"用户名未注册");
+            return Result.error(302,"用户名未注册",null);
         }
         else
         {
@@ -59,11 +61,12 @@ public class UserController {
                 claims.put("id",u.getId());
                 claims.put("username",u.getUsername());
                 String tokens = JwtUtil.getToken(claims);
-                return Result.success(tokens);
+                Token token = new Token(tokens,u.getRoot());
+                return Result.success(token);
             }
             else
             {
-                return Result.error(303,"密码错误");
+                return Result.error(303,"密码错误",null);
             }
         }
     }
@@ -78,8 +81,12 @@ public class UserController {
 
 
     @PutMapping("/update")
-    public Result<String> update(@RequestBody @Validated User user){
-        userservice.update(user);
+    public Result<String> update(@Validated UserUpdate userupdate){
+        try {
+            userservice.update(userupdate);
+        } catch (Exception e) {
+            Result.error(330,e.getMessage());
+        }
         return Result.success();
     }
 

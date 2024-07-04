@@ -1,7 +1,9 @@
 package com.starbucks.coffee_order.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,9 +20,13 @@ public class Order {
     @NotNull
     private Integer totalPrice;
 
+    @NotNull
+    private String storeName;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime orderDate;
 
-    @JsonValue
-    private OrderStatus status = OrderStatus.pending;
+    @NotNull
+    private Integer status = 0;
 
 }

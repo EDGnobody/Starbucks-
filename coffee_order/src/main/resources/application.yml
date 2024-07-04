@@ -14,3 +14,5 @@ mybatis:
   type-aliases-package: com.starbucks.coffee_order.pojo
   configuration:
     map-underscore-to-camel-case: true
+reggie:
+  path: /www/wwwroot/images/

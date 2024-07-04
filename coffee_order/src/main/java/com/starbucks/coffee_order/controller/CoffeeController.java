@@ -27,7 +27,7 @@ public class CoffeeController {
     }
 
     @PostMapping(value = "/create")
-    public Result<String> createCoffee(String name,Integer price,String description,String category) {
+    public Result<String> createCoffee(String name,Integer price,String description,String category,String picture) {
         Coffee coffee = new Coffee();
         coffee.setName(name);
         coffee.setPrice(price);
@@ -37,6 +37,9 @@ public class CoffeeController {
         if(category != null) {
             coffee.setCategory(category);
         }
+        if (picture != null) {
+            coffee.setPicture(picture);
+        }
         try {
             coffeeservice.createCoffee(coffee);
             return Result.success();
@@ -44,13 +47,13 @@ public class CoffeeController {
             return Result.error(308, e.getMessage());
         }
     }
-    @GetMapping("/{name}")
-    public Result<Coffee> getCoffee(@PathVariable String name) {
-        Coffee c = coffeeservice.findByName(name);
-        if (c==null){
-            return Result.error(311,"咖啡不存在",null);
+    @GetMapping("/{category}")
+    public Result<List<Coffee>> getCoffee(@PathVariable String category) {
+        List<Coffee> coffeeList = coffeeservice.findByCategory(category);
+        if (coffeeList ==null){
+            return Result.error(311,"分类不存在",null);
         }
-        return Result.success(c);
+        return Result.success(coffeeList);
     }
 
     @PutMapping("/updateCoffee")

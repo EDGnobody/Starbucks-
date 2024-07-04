@@ -1,8 +1,6 @@
 package com.starbucks.coffee_order.service;
 
-import com.starbucks.coffee_order.pojo.Coffee;
-import com.starbucks.coffee_order.pojo.Order;
-import com.starbucks.coffee_order.pojo.OrderItem;
+import com.starbucks.coffee_order.pojo.*;
 
 import java.util.List;
 
@@ -10,5 +8,13 @@ import java.util.List;
 public interface OrderService {
     Coffee findByName(String name);
 
-    Order createOrder(List<OrderItem> orderList);
+    Order createOrder(OrderRequest orderRequest);
+
+    List<OrderReturn> findByUserId(Integer id);
+
+    void setOrderCompleted(Integer orderId);
+
+    void setOrderCancelled(Integer orderId);
+
+    Store findStore(String storeName);
 }

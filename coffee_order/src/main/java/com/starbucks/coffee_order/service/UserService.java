@@ -1,6 +1,7 @@
 package com.starbucks.coffee_order.service;
 
 import com.starbucks.coffee_order.pojo.User;
+import com.starbucks.coffee_order.pojo.UserUpdate;
 
 public interface UserService {
 
@@ -10,7 +11,7 @@ public interface UserService {
     //注册
     void register(String username, String password);
 
-    void update(User user);
+    void update(UserUpdate userupdate);
 
     void updateAvatar(String avatarUrl);
 

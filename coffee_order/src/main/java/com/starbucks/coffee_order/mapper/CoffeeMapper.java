@@ -17,8 +17,8 @@ public interface CoffeeMapper {
     @Select("select * from coffee where id=#{id}")
     Coffee findById(int id);
 
-    @Insert("insert into coffee(name,description,price,category,available,create_time,update_time) " +
-            "values(#{name},#{description},#{price},#{category},#{available},now(),now())")
+    @Insert("insert into coffee(name,description,price,category,available,picture,create_time,update_time) " +
+            "values(#{name},#{description},#{price},#{category},#{available},#{picture},now(),now())")
     void create(Coffee coffee);
 
     @Update("update coffee set name=#{name},price=#{price},description=#{description},update_time=now() where id=#{id}")
@@ -29,4 +29,7 @@ public interface CoffeeMapper {
 
     @Select("select * from coffee order by category")
     List<Coffee> get_category_list();
+
+    @Select("select * from coffee where category=#{category}")
+    List<Coffee> findByCategory(String category);
 }

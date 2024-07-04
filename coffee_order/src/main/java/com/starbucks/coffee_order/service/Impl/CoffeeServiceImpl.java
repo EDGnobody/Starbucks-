@@ -48,5 +48,10 @@ public class CoffeeServiceImpl implements CoffeeService {
         return coffeemapper.get_category_list();
     }
 
+    @Override
+    public List<Coffee> findByCategory(String category) {
+        return coffeemapper.findByCategory(category);
+    }
+
 }
 

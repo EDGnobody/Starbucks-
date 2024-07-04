@@ -16,4 +16,6 @@ public interface CoffeeService {
     Coffee findByName(String name);
 
     List<Coffee> getCoffeeList();
+
+    List<Coffee> findByCategory(String category);
 }
