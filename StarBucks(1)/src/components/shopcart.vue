@@ -61,16 +61,14 @@
   <h2>咖啡</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in coffeeNumber" :key="i" class="box-card" style="width: 15%">
       <template #header>
         <div class="card-header">
-          <span>Card name</span>
-          <el-button class="button" text>Operation button</el-button>
+          <span>{{ coffeeList[i-1].name }}</span>
+          <el-button class="button" text>加入购物车</el-button>
         </div>
       </template>
-      <div v-for="o in 4" :key="o" class="text item">
-        {{ 'List item ' + o }}
-      </div>
+     <img :src="'http://139.155.128.8:5650/file/download/'+coffeeList[i-1].picture" alt="咖啡图片">  
     </el-card>
   </el-space>
 </div>
@@ -78,16 +76,14 @@
   <h2>果茶</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in fruitNumber" :key="i" class="box-card" style="width: 15%">
       <template #header>
         <div class="card-header">
-          <span>Card name</span>
-          <el-button class="button" text>Operation button</el-button>
+          <span>{{ fruitList[i-1].name }}</span>
+          <el-button class="button" text>加入购物车</el-button>
         </div>
       </template>
-      <div v-for="o in 4" :key="o" class="text item">
-        {{ 'List item ' + o }}
-      </div>
+      <img :src="'http://139.155.128.8:5650/file/download/'+fruitList[i-1].picture" alt="果茶图片">  
     </el-card>
   </el-space>
 </div>
@@ -95,33 +91,49 @@
   <h2>奶茶</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in 5" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in milkNumber" :key="i" class="box-card" style="width: 15%">
       <template #header>
         <div class="card-header">
-          <span>Card name</span>
-          <el-button class="button" text>Operation button</el-button>
+          <span>{{ milkList[i-1].name }}</span>
+          <el-button class="button" text>加入购物车</el-button>
         </div>
       </template>
-      <div v-for="o in 4" :key="o" class="text item">
-        {{ 'List item ' + o }}
-      </div>
+      <img :src="'http://139.155.128.8:5650/file/download/'+milkList[i-1].picture" alt="奶茶图片">  
     </el-card>
   </el-space>
 </div>
-
+<hr>
+<!-- 购物车 -->
+<el-affix position="bottom" :offset="100">
+  <!-- 购物车图标 -->
+  <!-- <el-icon class="icon"><ShoppingCart /></el-icon> -->
+  <el-avatar  class="icon" src="../images/shopcart.png">
+  </el-avatar>
+   <!-- <img class="icon" src="../images/shopcart.png" alt=""> -->
+<!-- 购物车卡片 -->
+  <!-- <el-card  style="width: 100%;margin-top: 10px;">
+  </el-card> -->
+  </el-affix>
 </template>
 
 <script lang="ts" setup >
-import { onMounted, reactive } from 'vue';
+import { onBeforeMount, onMounted, reactive, ref } from 'vue';
 import { createCoffee ,getCoffeeList} from '@/utils/api';
 import { ElMessage } from 'element-plus';
 import { useUserStore } from '@/store/user';
+import { ShoppingCart } from '@element-plus/icons-vue'
 const userStore=useUserStore();
  const form=reactive({
             name: "",
             price:"",
             category: ""
-          })
+          });
+const coffeeNumber=ref(0)
+var coffeeList:any=[]
+const milkNumber=ref(0)
+var milkList:any=[]
+const fruitNumber=ref(0)
+var fruitList:any=[]
 // 管理员添加饮料品种
   function addNewCoffee(){
     if(form.category.length!=0&&form.name.length!=0&&form.price.length!=0){
@@ -140,15 +152,32 @@ form.price="";
   }
 
   // 获取咖啡列表
-  // onMounted(()=>{
-  //       getCoffeeList().then(res=>{
-  //         console.log(9999)
-  //         console.log(res.data.length)
-  //       });
-  //     })
+  onMounted(()=>{
+    // 获取咖啡列表
+        getCoffeeList("咖啡").then(res=>{
+          coffeeList=res.data
+       coffeeNumber.value=res.data.length;
+        });
+// 获取奶茶列表
+getCoffeeList("奶茶").then(res=>{
+          milkList=res.data
+       milkNumber.value=res.data.length;
+        });
+//获取果茶列表
+getCoffeeList("果茶").then(res=>{
+          fruitList=res.data
+       fruitNumber.value=res.data.length;
+        });
+      })
+    
 </script>
 
 <style scoped>
+.icon{
+ width: 100px;
+ height: 100px;
+  margin-left: 80%;
+}
 img{
     width: 100%;
     height: auto;

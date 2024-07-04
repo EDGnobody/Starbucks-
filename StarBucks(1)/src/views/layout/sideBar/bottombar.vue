@@ -97,7 +97,6 @@ onMounted(()=>{
         getStoreList().then(res=>{
           storeList=res.data
         });
-      
       })
 </script>
 
