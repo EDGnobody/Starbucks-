@@ -1,7 +1,7 @@
 <template>
 <!-- 这是用户账户信息展示页面 -->
  <div class="main">
-    <el-card class="card" style="width: 700px">
+    <el-card class="card">
     <template #header>
         <!-- 用户信息框 -->
         <el-popover  placement="top" trigger="click" :width="200">
@@ -25,11 +25,11 @@
     />
   </el-card>
   <!--  -->
-  <el-card class="card" style="width: 700px;margin-top: 10px;">
-   
+  <el-card class="card" style="margin-top: 10px;">
+    <img src="../images/image.png" class="equilt" style="width: 90%"></img>
   </el-card>
   <!-- 消费记录 -->
-  <el-card class="card" style="width: 700px;margin-top: 10px;">
+  <el-card class="card" style="width: 100%;margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
 
@@ -103,10 +103,11 @@ onMounted(()=>{
 }
 .card{
     margin-top: 0;
-    margin-left: 20%;
+    width: 100%
+    /* margin-left: ; */
 }
 .equilt{
-    width: 700px;
+    width: 100%;
     left:0;
     top:0;
     margin-left: 0;
