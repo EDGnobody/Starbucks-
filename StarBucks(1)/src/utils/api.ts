@@ -38,12 +38,11 @@ export const register =(params:any)=>
 export const getCoffeeList =(params:any)=>
     $http(
         {
-        url:"/coffee/{category}",
+        url:"/coffee/"+params,
         method:"get",
         headers:{
             "Authorization":localStorage.getItem('token')
-        },
-        params:params
+        }
             })
 // 创建新的咖啡商品
 export const createCoffee =(params:any)=>
@@ -92,12 +91,14 @@ export const createStore =(params:any)=>
         })
 // 订单信息
 // 获取历史订单
-// export const getOrderList =()=>
-//     $http(
-//         {
-//             url:"/order/get_by_user_id",
-//             method:"get",
-//             headers:{
-//                 "Authorization":localStorage.getItem('token')
-//             }
-//         })
+export const getOrderList =()=>
+    $http(
+        {
+            url:"/order/get_by_user_id",
+            method:"get",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            }
+        })
+
+// 获取咖啡图片

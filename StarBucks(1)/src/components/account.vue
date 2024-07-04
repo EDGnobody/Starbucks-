@@ -43,6 +43,21 @@
   <el-card class="card" style="width: 100%;margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
+
+   <div class="demo-collapse">
+    <el-collapse >
+      <el-collapse-item  v-for="i in orderNumber" key="i" :title="orderList[i-1].order.orderDate" name="1">
+        <div>
+          Consistent with real life: in line with the process and logic of real
+          life, and comply with languages and habits that the users are used to;
+        </div>
+        <div>
+          Consistent within interface: all elements should be consistent, such
+          as: design style, icons and texts, position of elements, etc.
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
   </el-card>
 
  </div>
@@ -50,14 +65,13 @@
 </template>
 
 <script lang="ts" setup >
-
-
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
-// import { getOrderList } from '@/utils/api';
+import { getOrderList } from '@/utils/api';
 const userStore=useUserStore();
+const orderNumber=ref(0);
 var avatars = ref([
 
   "./images/avatar-01.jpg",
@@ -78,16 +92,18 @@ function cancel(){
 function change(){
   item.value=(item.value+1) % 5;
 }
-
+var orderList:any=[]
 // 挂载
 // 获取历史订单信息
-// onMounted(()=>{
-//   getOrderList().then(res=>{
-//   if(res.code==101){
-//      console.log(res.data)
-//      }  
-//    })
-//       })
+onMounted(()=>{
+  getOrderList().then(res=>{
+  if(res.code==101){
+    orderList=res.data
+    orderNumber.value=res.data.length;
+     console.log(res.data[0].order)
+     }  
+   })
+      })
 </script>
 
 <style scoped>
