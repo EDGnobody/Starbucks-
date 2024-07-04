@@ -107,11 +107,27 @@ export const createOrder =(params:any)=>
             url:"/order/add",
             method:"post",
             headers:{
+                "Content-Type":"application/json",
                 "Authorization":localStorage.getItem('token')
             },
             params: {
-                storeName:params.storeName,
-                items:params.items
+                // storeName:params.storeName,
+                // items:params.items
+                "storeName":"武汉保利城店",
+                "items":[
+                {
+                    "coffeeName":"芒果星冰乐",
+                    "quantity":"2"
+                },
+                {
+                    "coffeeName":"粉粉生咖",
+                    "quantity":"3"
+                },
+                {
+                    "coffeeName":"燕麦拿铁",
+                    "quantity":"3"
+                }
+            ]
             }
         })
 // 获取咖啡图片

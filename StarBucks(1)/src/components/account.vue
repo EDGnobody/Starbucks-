@@ -40,36 +40,53 @@
     <img src="../images/account-02.png" class="equilt" style="width: 90%"></img> -->
   </el-card>
   <!-- 消费记录 -->
-  <el-card class="card" style="margin-top: 10px;">
+  <el-card v-show="userStore.user.root==0" class="card" style="margin-top: 10px;min-height:200px">
    <div class="h1">消费记录</div>
    <hr>
-
-   <div class="demo-collapse">
-    <el-collapse >
-      <el-collapse-item  v-for="i in orderNumber" key="i" :title="orderList[i-1].order.orderDate" name="1">
-        <div>
-          Consistent with real life: in line with the process and logic of real
-          life, and comply with languages and habits that the users are used to;
-        </div>
-        <div>
-          Consistent within interface: all elements should be consistent, such
-          as: design style, icons and texts, position of elements, etc.
-        </div>
+<div v-show="orderNumber==0" ><h2>暂无消费记录</h2></div>
+    <div class="demo-collapse">
+    <el-collapse  accordion>
+      <el-collapse-item v-for="i in orderNumber" key="i"  >
+        <template #title>{{orderList[i-1].order.orderDate}}</template>
+        <el-descriptions >
+    <el-descriptions-item label="店名" >{{orderList[i-1].order.storeName}}</el-descriptions-item>
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item >购买清单如下：</el-descriptions-item>   
+  </el-descriptions>
+  <el-descriptions v-for="item in orderList[i-1].orderItems" >
+    <el-descriptions-item width="200">{{item.coffeeName  }}</el-descriptions-item>  
+    <el-descriptions-item label="单价" width="200">{{item.price }}</el-descriptions-item>  
+    <el-descriptions-item label="数量" width="200">{{item.quantity  }}</el-descriptions-item>  
+  </el-descriptions>
+  <el-descriptions >
+    <el-descriptions-item label="总价格">{{ orderList[i-1].order.totalPrice }}</el-descriptions-item>
+  </el-descriptions>
       </el-collapse-item>
     </el-collapse>
   </div>
+  
   </el-card>
+  <!-- <el-card v-show="userStore.user.root==1" class="card" style="margin-top: 10px;">
+    <div  style="margin-top:30px">
+  <h2>管理员模式专属</h2>
+  <hr>
 
+  <el-button type="primary"  >确认</el-button>
+ 
+ </div>
+  </el-card> -->
  </div>
 
 </template>
 
 <script lang="ts" setup >
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
-import { getOrderList } from '@/utils/api';
+import { getOrderList, register } from '@/utils/api';
+import { ElMessage } from 'element-plus';
 const userStore=useUserStore();
 const orderNumber=ref(0);
 var avatars = ref([
@@ -85,7 +102,6 @@ var avatars = ref([
 let item=ref(1);
 function cancel(){
   userStore.setLoginInfo('','',0)
-  console.log(userStore.user.username=='')
     router.push("/login")
 }
 
@@ -93,6 +109,31 @@ function change(){
   item.value=(item.value+1) % 5;
 }
 var orderList:any=[]
+// 
+
+// const form=reactive({
+//             username: "",
+//             password: ""
+//           })
+//     const password=ref("")
+//     const passwordInputing=ref(false)
+//     const newpasswordInputing=ref(false)
+//     function handleRegister(){
+//   if(form.username.length!=0&&form.password.length!=0){
+//   if(password.value==form.password){
+//   register(form).then(res=>{  
+//   if(res.data==101){
+//     ElMessage({
+//     message: '管理员账号注册成功',
+//     type: 'success',
+//   })
+//      }
+    
+// })
+//     }else{
+//       ElMessage.error('两次输入密码不一致')
+//     } }
+//   }
 // 挂载
 // 获取历史订单信息
 onMounted(()=>{
@@ -100,7 +141,6 @@ onMounted(()=>{
   if(res.code==101){
     orderList=res.data
     orderNumber.value=res.data.length;
-     console.log(res.data[0].order)
      }  
    })
       })

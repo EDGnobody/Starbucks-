@@ -116,6 +116,7 @@ onMounted(()=>{
    })
    setTimeout(() => {
     initMap();
+    console.log(addressList)
     },500)     
       })
 

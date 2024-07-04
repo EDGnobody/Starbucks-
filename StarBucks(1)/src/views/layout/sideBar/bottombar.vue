@@ -47,7 +47,7 @@
   <!-- 地址列表 -->
   <div class="demo-collapse">
     <el-collapse  accordion>
-      <el-collapse-item v-for="i in number" :key="i"  :name="storeList[i-1].name">
+      <el-collapse-item v-for="i in number" key="i"  :name="storeList[i-1].name">
         <template #title>
           <el-icon class="header-icon" @click="changeAddress(storeList[i-1].latitude,storeList[i-1].longitude)">
             <Location />

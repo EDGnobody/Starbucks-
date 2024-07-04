@@ -83,14 +83,10 @@ function handleRegister(){
     
 })
     }else{
-      console.log(8888)
       ElMessage.error('两次输入密码不一致')
     } }
   }
   // 用户信息存入浏览器
-  userStore.$subscribe((mutate,state)=>{
-    localStorage.setItem('user',JSON.stringify(state.user))
-})
     </script>
     
     <style scoped>
