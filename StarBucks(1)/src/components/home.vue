@@ -62,6 +62,7 @@
           <div class="club-logo">
             <img
               src="../assets/starbucks-logo.png"
+              style="float: right;"
             />
           </div>
         </div>

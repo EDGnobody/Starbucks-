@@ -23,22 +23,30 @@
         class="equilt"
       src="../images/equilt.png"
     />
+    <!-- <img 
+      src="../images/bar.png"
+    /> -->
   </el-card>
   <!--  -->
-  <el-card class="card" style="margin-top: 10px;">
-    <div> 
-      <h2>星享日常所爱</h2>
-	      <div>	
-		      <img class="image" src="../images/account-1.png" alt="image">
-		      <p>
-            一份指定中杯手工调制饮品/星巴克\浓/系列饮品/烘焙食品/酸奶/水果沙拉/三明治
-          </p>
-	      </div>
-    </div>
+  <el-card class="card" style="margin-top: 10px;height: 360px;">
+    <img src="../assets/gift.png" class="equilt" style="width: 90%"></img>
+    <hr style="border: 0; border-top: 4px solid rgb(8, 85, 25);">
+    <el-carousel :interval="6000" arrow="always">
+      <el-carousel-item v-for="(item, index) in items" :key="index">
+        <div>
+          <img class="image" :src="item.imgSrc" :alt="item.altText">
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+
+   
+  </el-card>
+
 <!--     
     <img src="../images/account-01.png" class="equilt" style="width: 90%"></img>
     <img src="../images/account-02.png" class="equilt" style="width: 90%"></img> -->
-  </el-card>
   <!-- 消费记录 -->
   <el-card v-show="userStore.user.root==0" class="card" style="margin-top: 10px;min-height:200px">
    <div class="h1">消费记录</div>
@@ -144,6 +152,52 @@ onMounted(()=>{
      }  
    })
       })
+   
+      const items = ref([
+  {
+    imgSrc: './images/account-1.png',
+    altText: 'image',
+    title: '星享日常所爱',
+    description: '一份指定中杯手工调制饮品/星巴克\\浓/系列饮品/烘焙食品/酸奶/水果沙拉/三明治'
+  },
+  {
+    imgSrc: './images/account-2.png',
+    altText: 'image',
+    title: '星享奇妙无穷',
+    description: '一份指定臻选™手工调制饮品（臻选浓缩/臻选冲煮探秘/臻选冷萃）/臻选咖啡融合冰淇淋产品/星享小点整盒/星轻食系列产品'
+  },
+  {
+    imgSrc: './images/account-3.png',
+    altText: 'image',
+    title: '定制挚爱风味',
+    description: '一次升杯、一次添加浓缩咖啡、糖浆等客制化权益'
+  },
+  {
+    imgSrc: './images/account-4.png',
+    altText: 'image',
+    title: '星享确幸好礼',
+    description: '一张指定中杯手工调制饮品7折优惠券或一张专星送免运费券'
+  },
+  {
+    imgSrc: './images/account-5.png',
+    altText: 'image',
+    title: '星享心意礼遇',
+    description: '一张指定中杯手工调制饮品6折优惠券'
+  },
+  {
+    imgSrc: './images/account-6.png',
+    altText: 'image',
+    title: '满星欢喜',
+    description: '一份星巴克臻选上海烘焙工坊指定产品78元抵用券/一份星巴克门店指定单品75元抵用券'
+  },
+  {
+    imgSrc: './images/account-7.png',
+    altText: 'image',
+    title: '星享升级体验',
+    description: '一份指定中杯季节性手工调制饮品/冷萃咖啡/慕斯浓缩/冰震浓缩(大杯+1星)/意榄朵™(大杯+1星)/星巴克冰淇淋系列产品/蛋糕甜点/三明治/卷类产品/指定单品45元抵用券。'
+  },
+]);
+
 </script>
 
 <style scoped>
@@ -154,8 +208,8 @@ onMounted(()=>{
 }
 .card{
     margin-top: 0;
-    width: 60%;
-    margin-left: 20%;
+    width: 70%;
+    margin-left: 15%;
 }
 .equilt{
     width: 100%;
@@ -178,4 +232,11 @@ onMounted(()=>{
     height: auto;
     float: right;
 }
+p {
+  color: rgb(118, 118, 118);
+}
+.el-carousel__item h3 {
+    color: #475669;
+    margin: 0;
+  }
 </style>
