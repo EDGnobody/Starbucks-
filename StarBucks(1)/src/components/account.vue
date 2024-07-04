@@ -26,10 +26,10 @@
   </el-card>
   <!--  -->
   <el-card class="card" style="margin-top: 10px;">
-    <img src="../images/image.png" class="equilt" style="width: 90%"></img>
+    <img src="../images/card.png" class="equilt" style="width: 90%"></img>
   </el-card>
   <!-- 消费记录 -->
-  <el-card class="card" style="width: 100%;margin-top: 10px;">
+  <el-card class="card" style="margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
 
@@ -103,8 +103,8 @@ onMounted(()=>{
 }
 .card{
     margin-top: 0;
-    width: 100%
-    /* margin-left: ; */
+    width: 60%;
+    margin-left: 20%;
 }
 .equilt{
     width: 100%;

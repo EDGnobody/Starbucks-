@@ -100,5 +100,18 @@ export const getOrderList =()=>
                 "Authorization":localStorage.getItem('token')
             }
         })
-
+// 发送订单
+export const createOrder =(params:any)=>
+    $http(
+        {
+            url:"/order/add",
+            method:"post",
+            headers:{
+                "Authorization":localStorage.getItem('token')
+            },
+            params: {
+                storeName:params.storeName,
+                items:params.items
+            }
+        })
 // 获取咖啡图片
