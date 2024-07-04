@@ -61,7 +61,7 @@
   <h2>咖啡</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in coffeeNumber" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in coffeeNumber" :key="i" class="box-card" style="width: 350px">
       <template #header>
         <div class="card-header">
           <span>{{ coffeeList[i-1].name }}</span>
@@ -76,7 +76,7 @@
   <h2>果茶</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in fruitNumber" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in fruitNumber" :key="i" class="box-card" style="width: 350px">
       <template #header>
         <div class="card-header">
           <span>{{ fruitList[i-1].name }}</span>
@@ -91,7 +91,7 @@
   <h2>奶茶</h2>
   <hr>
 <el-space wrap>
-    <el-card v-for="i in milkNumber" :key="i" class="box-card" style="width: 15%">
+    <el-card v-for="i in milkNumber" :key="i" class="box-card" style="width: 350px">
       <template #header>
         <div class="card-header">
           <span>{{ milkList[i-1].name }}</span>
@@ -104,15 +104,19 @@
 </div>
 <hr>
 <!-- 购物车 -->
-<el-affix position="bottom" :offset="100">
+<el-affix position="bottom" :offset="50">
   <!-- 购物车图标 -->
   <!-- <el-icon class="icon"><ShoppingCart /></el-icon> -->
-  <el-avatar  class="icon" src="../images/shopcart.png">
-  </el-avatar>
+  <!-- <el-avatar v-show="visible" class="icon" src="../images/image.png" @click="showCart">
+  </el-avatar> -->
    <!-- <img class="icon" src="../images/shopcart.png" alt=""> -->
 <!-- 购物车卡片 -->
-  <!-- <el-card  style="width: 100%;margin-top: 10px;">
-  </el-card> -->
+  <el-card  style="width: 100%;margin-top: 10px;">
+    <div>以下是你选购的商品</div>
+    <hr>
+    <!-- <el-avatar v-show="!visible" class="icon" src="../images/image.png" @click="showCart">
+    </el-avatar> -->
+  </el-card>
   </el-affix>
 </template>
 
@@ -133,7 +137,20 @@ var coffeeList:any=[]
 const milkNumber=ref(0)
 var milkList:any=[]
 const fruitNumber=ref(0)
-var fruitList:any=[]
+const visible=ref(true)
+var fruitList:any=[];
+const orderList=reactive(
+  {
+    storeName:"",
+    items:[
+]
+}
+)
+const order=reactive({
+        coffeeName:"",
+        quantity:0
+          })
+// 将商品添加到购物车
 // 管理员添加饮料品种
   function addNewCoffee(){
     if(form.category.length!=0&&form.name.length!=0&&form.price.length!=0){
@@ -143,14 +160,16 @@ var fruitList:any=[]
     message: '添加成功',
     type: 'success',
   })
-
 })
 form.category="";
 form.name="";
 form.price="";
     }
   }
-
+// 显示购物车
+// function showCart(){
+//   visible.value=!visible.value
+// }
   // 获取咖啡列表
   onMounted(()=>{
     // 获取咖啡列表
@@ -169,7 +188,6 @@ getCoffeeList("果茶").then(res=>{
        fruitNumber.value=res.data.length;
         });
       })
-    
 </script>
 
 <style scoped>

@@ -2,26 +2,31 @@
     <div id="container"></div>
   </template>
   
-  <script>
+  <script setup>
   import {onMounted,reactive,ref} from 'vue'
-  export default {
-    setup () {
-      
+  import { useRoute } from 'vue-router'
+  import { getStoreList } from '@/utils/api';
+  
+const route = useRoute()
+//params
+
+let latitude=route.params.latitude||30.579611;
+let longitude=route.params.longitude||114.291324;
+  var addressList=[]
       const initMap = ()=>{
     //定义地图中心点坐标     
-        var center = new window.TMap.LatLng(39.984120, 116.307484)
+        var center = new window.TMap.LatLng(30.579611,114.291324)
         //定义map变量，调用 TMap.Map() 构造函数创建地图
         
         var map = new window.TMap.Map(document.getElementById('container'), {
             center: center,//设置地图中心点坐标
-            zoom: 15,   //设置地图缩放级别
+            zoom: 12,   //设置地图缩放级别
         });
   
         //获取缩放控件
         var control = map.getControl(window.TMap.constants.DEFAULT_CONTROL_ID.ZOOM);
         control.setNumVisible(true);
-  
-  
+    
         //创建并初始化MultiMarker
         var marker = new window.TMap.MultiMarker({
             map: map,  //指定地图容器
@@ -45,25 +50,10 @@
                 })
            },
             //点标记数据数组
-            geometries: [{
-                "id": "1",   //点标记唯一标识，后续如果有删除、修改位置等操作，都需要此id
-                "styleId": 'myStyle',  //指定样式id
-                "position": new window.TMap.LatLng(39.954104, 116.357503),  //点标记坐标位置
-                "properties": {//自定义属性
-                    "title": "marker1",
-                    "info":"info1"
-                }
-              }, {//第二个点标记
-              "id": "2",
-              "styleId": 'crop1',
-              "position": new window.TMap.LatLng(39.994104, 116.287503),
-              "properties": {
-                  "title": "marker2",
-                  "info":"info2"
-              }
-            }]
+            geometries:addressList
           });
-  
+        // }  
+      // })
         //创建点聚合对象
         /* var markerCluster = new window.TMap.MarkerCluster({
             id: 'cluster', //图层id
@@ -100,21 +90,36 @@
             infoWindow.open(); //打开信息窗
             infoWindow.setPosition(evt.geometry.position);//设置信息窗位置
              //将信息与标记点关联起来
-            infoWindow.setContent(evt.geometry.properties.title+
-            evt.geometry.properties.info);//设置信息窗内容
+            infoWindow.setContent(evt.geometry.properties.title);//设置信息窗内容
            
            // console.log(evt)
          })
           
       }
-      onMounted(()=>{
-        initMap()
+
+var milkList=[]
+onMounted(()=>{
+        getStoreList().then(res=>{
+  if(res.code==101){
+    milkList=res.data
+    milkList.forEach(element => {
+      addressList.push({
+                "id": element.id,   //点标记唯一标识，后续如果有删除、修改位置等操作，都需要此id
+                "styleId": 'myStyle',  //指定样式id
+                "position": new window.TMap.LatLng(element.latitude,element.longitude),  //点标记坐标位置
+                "properties": {//自定义属性
+                    "title": element.name,
+                }
+              })
+    });
+     }  
+   })
+   setTimeout(() => {
+    initMap();
+    },500)     
       })
-      return {
-        
-      }
-    }
-  }
+
+  
   
   </script>
   

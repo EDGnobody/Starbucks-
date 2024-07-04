@@ -2,7 +2,7 @@
 <div class="showarea">
 
 <!-- 首页侧边栏 -->
-<div v-if="router.name=='home'" class="home">
+<div v-if="route.name=='home'" class="home">
       <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <hr>
@@ -19,7 +19,7 @@
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-    <div v-else-if=" router.name =='login'|| router.name =='register'||router.name =='account'||router.name=='store'" class="account">
+    <div v-else-if=" route.name =='login'|| route.name =='register'||route.name =='account'||route.name=='store'" class="account">
       <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
   
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
@@ -37,7 +37,7 @@
       
     </div>
 <!-- 菜单侧边栏 -->
-<div v-else-if="router.name=='address'" >
+<div v-else-if="route.name=='address'" >
   
   <div v-show="userStore.user.root==1" style="margin-top:30px">
   <h2>管理员模式专属</h2>
@@ -47,21 +47,21 @@
   <!-- 地址列表 -->
   <div class="demo-collapse">
     <el-collapse  accordion>
-      <el-collapse-item v-for="item in storeList" :key="item.id"  :name="item.name">
+      <el-collapse-item v-for="i in number" :key="i"  :name="storeList[i-1].name">
         <template #title>
-          <el-icon class="header-icon" @click="changeAddress">
+          <el-icon class="header-icon" @click="changeAddress(storeList[i-1].latitude,storeList[i-1].longitude)">
             <Location />
           </el-icon>
-        {{item.name}}
+        {{storeList[i-1].name}}
         </template>
         <el-descriptions >
-    <el-descriptions-item label="店名" >{{item.name}}</el-descriptions-item>
+    <el-descriptions-item label="店名" >{{storeList[i-1].name}}</el-descriptions-item>
   </el-descriptions>
   <el-descriptions >
-    <el-descriptions-item label="电话号码">{{ item.phone }}</el-descriptions-item>
+    <el-descriptions-item label="电话号码">{{ storeList[i-1].phone }}</el-descriptions-item>
   </el-descriptions>
   <el-descriptions >
-    <el-descriptions-item label="地址">{{ item.location }}</el-descriptions-item>
+    <el-descriptions-item label="地址">{{ storeList[i-1].location }}</el-descriptions-item>
   </el-descriptions>
       </el-collapse-item>
     </el-collapse>
@@ -74,28 +74,30 @@
 </div>
 </template>
 
-<script lang="ts" setup name="bottombar">
+<script lang="ts" setup >
 
 const props=defineProps(['page'])
 import { onBeforeMount, onMounted, ref, toRefs } from 'vue';
 import { useUserStore } from '@/store/user';
 import { getCoffeeList, getStoreList } from '@/utils/api';
-
 import { Location } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
 import { useListStore } from '@/store/store';
-
+const number=ref(0)
 const userStore=useUserStore();
 const listStore=useListStore()
-const router=useRoute();
+const router=useRouter();
+const route=useRoute()
 // 改变地图坐标位置
-function changeAddress(){
-console.log(8888)
+function changeAddress(x:any,y:any){
+  // router.push({ name: 'address', params: { latitude: x,longitude:y }})
 }
 var storeList:any=[]
 onMounted(()=>{
         getStoreList().then(res=>{
-          storeList=res.data
+          storeList=res.data;
+          number.value=res.data.length
         });
       })
 </script>

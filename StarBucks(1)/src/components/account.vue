@@ -163,8 +163,13 @@ onMounted(()=>{
 }
 .card{
     margin-top: 0;
+<<<<<<< HEAD
     width: 70%;
     margin-left: 15%;
+=======
+    width: 60%;
+    margin-left: 20%;
+>>>>>>> fc061d7af069412ad881fc4001b075a9d52ab8ac
 }
 .equilt{
     width: 100%;
