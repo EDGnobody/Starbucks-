@@ -27,9 +27,6 @@
   <el-card class="card" style="width: 700px;margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
-
-
-
   </el-card>
 
  </div>
@@ -43,7 +40,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
-import { getOrderList } from '@/utils/api';
+// import { getOrderList } from '@/utils/api';
 const userStore=useUserStore();
 var avatars = ref([
 
@@ -57,23 +54,24 @@ var avatars = ref([
 // 退出登录功能
 let item=ref(1);
 function cancel(){
-  userStore.setLoginInfo(null,null)
+  userStore.setLoginInfo('','',0)
+  console.log(userStore.user.username=='')
     router.push("/login")
 }
 
 function change(){
   item.value=(item.value+1) % 5;
 }
-// 获取历史订单信息
 
 // 挂载
-onMounted(()=>{
-  getOrderList().then(res=>{
-    // if(res.data.code==101){
-    // // console.log(res.data)
-    //  }  
-   })
- })
+// 获取历史订单信息
+// onMounted(()=>{
+//   getOrderList().then(res=>{
+//   if(res.code==101){
+//      console.log(res.data)
+//      }  
+//    })
+//       })
 </script>
 
 <style scoped>

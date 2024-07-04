@@ -23,7 +23,7 @@
   </el-carousel>
 </div>
 <!-- 管理员模式 -->
- <div style="margin-top:30px">
+ <div v-show="userStore.user.root==1" style="margin-top:30px">
   <h2>管理员模式专属</h2>
   <hr>
   <el-card class="box-card" style="width: 500px">
@@ -113,6 +113,8 @@
 import { onMounted, reactive } from 'vue';
 import { createCoffee ,getCoffeeList} from '@/utils/api';
 import { ElMessage } from 'element-plus';
+import { useUserStore } from '@/store/user';
+const userStore=useUserStore();
  const form=reactive({
             name: "",
             price:"",
@@ -139,7 +141,7 @@ form.price="";
   // onMounted(()=>{
   //       getCoffeeList().then(res=>{
   //         console.log(9999)
-  //         console.log(res)
+  //         console.log(res.data.length)
   //       });
   //     })
 </script>

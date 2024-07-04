@@ -75,7 +75,7 @@ function handleRegister(){
   if(res.data==101){
     login(form).then(res=>{
   if(res.code==101){
-      userStore.setLoginInfo(form.username,res.data)
+      userStore.setLoginInfo(form.username,res.data.token,res.data.root)
       router.push("/account")
      }  
    })

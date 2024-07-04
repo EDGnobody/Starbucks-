@@ -39,7 +39,6 @@ $http.interceptors.request.use(config=> {
  */
 $http.interceptors.response.use((res) => {
 const code:number=res.data.data.code
-console.log(code)
 if(code!=101){
   MSGS[code]
   ElMessage.error(MSGS[code])
