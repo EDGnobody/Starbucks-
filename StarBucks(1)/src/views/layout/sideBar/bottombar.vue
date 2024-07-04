@@ -2,24 +2,24 @@
 <div class="showarea">
 
 <!-- 首页侧边栏 -->
-<div v-if="pageStore.page=='home'" class="home">
+<div v-if="router.name=='home'" class="home">
       <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <hr>
       
       <div >
         <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
-        @click.native="pageStore.page = 'login'" class="login" to="/login">
+        class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
         <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
-         @click.native="pageStore.page = 'register'" class="reg" to="/register">注册</router-link>
+          class="reg" to="/register">注册</router-link>
          <br>
       </div>
     </div>
      <!-- 我的账户页面侧边栏 -->
-    <div v-else-if=" pageStore.page =='login'|| pageStore.page =='register'||pageStore.page =='account'||pageStore.page=='store'" class="account">
+    <div v-else-if=" router.name =='login'|| router.name =='register'||router.name =='account'||router.name=='store'" class="account">
       <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
   
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
@@ -27,22 +27,35 @@
       <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}">登录或创建一个新帐户 🌟</div>
       <div >
         <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
-        @click.native="pageStore.page = 'login'" class="login" to="/login">
+         class="login" to="/login">
           <img src="https://www.starbucks.com.cn/assets/icons/icon-account.svg"  />
           <span>登录</span>
         </router-link>
         <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
-         @click.native="pageStore.page = 'register'" class="reg" to="/register">注册</router-link>
+          class="reg" to="/register">注册</router-link>
       </div>
       
     </div>
 <!-- 菜单侧边栏 -->
-<div v-else-if="pageStore.page=='address'" >
+<div v-else-if="router.name=='address'" >
+  
+  <div v-show="userStore.user.root==1" style="margin-top:30px">
+  <h2>管理员模式专属</h2>
+  <hr>
+  
+ </div>
+  <!-- 地址列表 -->
   <div class="demo-collapse">
-    <el-collapse v-model="activeNames" @change="handleChange">
-      <el-collapse-item v-for="item in storeList" :key="item.id" :title="item.name" :name="item.name" >
+    <el-collapse  accordion>
+      <el-collapse-item v-for="item in storeList" :key="item.id"  :name="item.name">
+        <template #title>
+          <el-icon class="header-icon" @click="changeAddress">
+            <Location />
+          </el-icon>
+        {{item.name}}
+        </template>
         <el-descriptions >
-    <el-descriptions-item label="店名">{{item.name}}</el-descriptions-item>
+    <el-descriptions-item label="店名" >{{item.name}}</el-descriptions-item>
   </el-descriptions>
   <el-descriptions >
     <el-descriptions-item label="电话号码">{{ item.phone }}</el-descriptions-item>
@@ -64,28 +77,36 @@
 <script lang="ts" setup name="bottombar">
 
 const props=defineProps(['page'])
-import { onMounted, ref, toRefs } from 'vue';
+import { onBeforeMount, onMounted, ref, toRefs } from 'vue';
 import { useUserStore } from '@/store/user';
 import { getCoffeeList, getStoreList } from '@/utils/api';
-import { usePageStore } from '@/store/page';
-const pageStore=usePageStore();
+
+import { Location } from '@element-plus/icons-vue'
+import { useRoute } from 'vue-router';
+import { useListStore } from '@/store/store';
+
 const userStore=useUserStore();
-const activeNames = ref(['1'])
-const handleChange = (val: string[]) => {
-  
+const listStore=useListStore()
+const router=useRoute();
+// 改变地图坐标位置
+function changeAddress(){
+console.log(8888)
 }
 var storeList:any=[]
 onMounted(()=>{
-
         getStoreList().then(res=>{
           storeList=res.data
         });
-        
+      
       })
 </script>
 
 <style scoped>
-
+.header-icon{
+  width:  50px;
+  height: 50px;
+  size: 50cm;
+}
 .login {
   display: inline;
   color: #00a862;

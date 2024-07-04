@@ -34,15 +34,17 @@ export const register =(params:any)=>
 
 // 咖啡类
 // 获取咖啡列表
-export const getCoffeeList =()=>
+
+export const getCoffeeList =(params:any)=>
     $http(
         {
-            url:"/coffee/get_coffee_list",
-            method:"get",
-            // headers:{
-            //     "Authorization":localStorage.getItem('token')
-            // }
-        })
+        url:"/coffee/{category}",
+        method:"get",
+        headers:{
+            "Authorization":localStorage.getItem('token')
+        },
+        params:params
+            })
 // 创建新的咖啡商品
 export const createCoffee =(params:any)=>
             $http(

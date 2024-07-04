@@ -50,6 +50,8 @@
       </el-select>
     </el-form-item>
   </el-form>
+  <!-- 上传图片 -->
+   
   <el-button type="primary" @click="addNewCoffee" >确认</el-button>
     </el-card>
 

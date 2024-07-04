@@ -24,6 +24,11 @@
       src="../images/equilt.png"
     />
   </el-card>
+  <!--  -->
+  <el-card class="card" style="width: 700px;margin-top: 10px;">
+   
+  </el-card>
+  <!-- 消费记录 -->
   <el-card class="card" style="width: 700px;margin-top: 10px;">
    <div class="h1">消费记录</div>
    <hr>
