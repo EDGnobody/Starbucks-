@@ -26,7 +26,22 @@
   </el-card>
   <!--  -->
   <el-card class="card" style="margin-top: 10px;">
+<<<<<<< HEAD
     <img src="../images/card.png" class="equilt" style="width: 90%"></img>
+=======
+    <div> 
+      <h2>星享日常所爱</h2>
+	      <div>	
+		      <img class="image" src="../images/account-1.png" alt="image">
+		      <p>
+            一份指定中杯手工调制饮品/星巴克\浓/系列饮品/烘焙食品/酸奶/水果沙拉/三明治
+          </p>
+	      </div>
+    </div>
+<!--     
+    <img src="../images/account-01.png" class="equilt" style="width: 90%"></img>
+    <img src="../images/account-02.png" class="equilt" style="width: 90%"></img> -->
+>>>>>>> bcfaf29cecf18a4ba4168d5191b4fc2be3d36177
   </el-card>
   <!-- 消费记录 -->
   <el-card class="card" style="margin-top: 10px;">
@@ -121,5 +136,10 @@ onMounted(()=>{
     align-items: center;
     padding: 10px;
     /* style="text-align: right; margin: 0" */
+}
+.image{
+    width: 200px;
+    height: auto;
+    float: right;
 }
 </style>
