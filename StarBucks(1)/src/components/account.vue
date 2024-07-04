@@ -23,14 +23,19 @@
         class="equilt"
       src="../images/equilt.png"
     />
+    <!-- <img 
+      src="../images/bar.png"
+    /> -->
   </el-card>
   <!--  -->
-  <el-card class="card" style="margin-top: 10px;height: 200px;">
+  <el-card class="card" style="margin-top: 10px;height: 360px;">
+    <img src="../assets/gift.png" class="equilt" style="width: 90%"></img>
+    <hr style="border: 0; border-top: 4px solid rgb(8, 85, 25);">
     <el-carousel :interval="6000" arrow="always">
       <el-carousel-item v-for="(item, index) in items" :key="index">
         <div>
           <img class="image" :src="item.imgSrc" :alt="item.altText">
-          <h3>{{ item.title }}</h3>
+          <h2>{{ item.title }}</h2>
           <p>{{ item.description }}</p>
         </div>
       </el-carousel-item>
@@ -163,13 +168,8 @@ onMounted(()=>{
 }
 .card{
     margin-top: 0;
-<<<<<<< HEAD
     width: 70%;
     margin-left: 15%;
-=======
-    width: 60%;
-    margin-left: 20%;
->>>>>>> fc061d7af069412ad881fc4001b075a9d52ab8ac
 }
 .equilt{
     width: 100%;

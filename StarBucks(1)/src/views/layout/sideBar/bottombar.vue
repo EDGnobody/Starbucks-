@@ -3,10 +3,18 @@
 
 <!-- 首页侧边栏 -->
 <div v-if="route.name=='home'" class="home">
-      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
-      <div class="title">心情惬意，来杯咖啡吧 ☕</div>
-      <hr>
-      
+      <div class="title" id="randomString">{{ strings[randomIndex] }}</div>
+      <hr style="border: 0; border-top: 1px solid grey; width: 400px;">
+      <img 
+        src="./images/homepage-gift.png" 
+        class="image"
+        style="float: left;"
+        >
+      <img 
+        src="./images/homepage-star.png"
+        class="image"
+        style="float: right;"
+        >
       <div >
         <router-link :style="{'visibility': (userStore.user.username=='' ? 'visible' : 'hidden')}"
         class="login" to="/login">
@@ -20,7 +28,7 @@
     </div>
      <!-- 我的账户页面侧边栏 -->
     <div v-else-if=" route.name =='login'|| route.name =='register'||route.name =='account'||route.name=='store'" class="account">
-      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">欢迎回来，{{ userStore.user.username }}🌟</div>
+      <div class="title" :style="{'visibility': (userStore.user.username=='' ? 'hidden' : 'visible')}">{{greeting[greetingIndex]}}，{{ userStore.user.username }}🌟</div>
   
       <div class="title">心情惬意，来杯咖啡吧 ☕</div>
       <hr>
@@ -100,6 +108,36 @@ onMounted(()=>{
           number.value=res.data.length
         });
       })
+// 定义一个包含多个字符串的数组
+const strings = ref([
+  '想念的，会相见🍩', 
+  '生活就像美式，总有回甘✨', 
+  '保持期待与热爱🍫', 
+  '生活向美而生🍭', 
+  '细碎的美好🦄'
+]);
+const greeting = ref([
+  '早上好', 
+  '中午好', 
+  '下午好', 
+  '晚上好', 
+  '深夜了',
+]);
+// 生成一个随机数作为索引
+const randomIndex = Math.floor(Math.random() * strings.value.length);
+const hours = new Date().getHours();
+let greetingIndex = 0;
+if (hours >= 6 && hours < 11) {
+  greetingIndex = 0;
+} else if (hours >= 11 && hours < 13) {
+  greetingIndex = 1;
+} else if (hours >= 13 && hours < 17) {
+  greetingIndex = 2;
+} else if (hours >= 17 && hours < 22) {
+  greetingIndex = 3;
+} else {
+  greetingIndex = 4;
+}
 </script>
 
 <style scoped>
@@ -179,7 +217,7 @@ left: 80px;
   color: #212121;
 }
 .title {
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 550;
   padding-bottom: 12px;
 }
@@ -188,6 +226,10 @@ left: 80px;
     width: 100%;
     margin-top: 100px;
     position: relative;
+}
+.image{
+    width: 30px;
+    height: 30px;
 }
 /* h2{
     margin-top: 370px;
