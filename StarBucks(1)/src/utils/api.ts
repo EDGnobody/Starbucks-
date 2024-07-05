@@ -23,15 +23,16 @@ export const register =(params:any)=>
               }
         })
 
-        export const getUser =(params:any)=>
-            $http(
-                {
-                    url:"/user/userinfo",
-                    method:"post",
-                  
-                })
-
-
+export const  addAdmin=(params:any)=>
+    $http(
+        {
+            url:"/user/register_admin",
+            method:"post",
+            params: {
+                username: params.username,
+                password: params.password
+                    }
+        })
 // 咖啡类
 // 获取咖啡列表
 
@@ -81,9 +82,10 @@ export const createStore =(params:any)=>
             headers:{
                 "Authorization":localStorage.getItem('token')
             },
-            params: {
+                params: {
                     name: params.name,
                     location:params.location,
+                    province:params.province,
                     phone: params.phone,
                     latitude:params.latitude,
                     longitude:params.longitude
@@ -113,21 +115,6 @@ export const createOrder =(params:any)=>
             data: {
                 storeName:params.storeName,
                 items:params.items
-            //     "storeName":"武汉保利城店",
-            //     "items":[
-            //     {
-            //         "coffeeName":"芒果星冰乐",
-            //         "quantity":"2"
-            //     },
-            //     {
-            //         "coffeeName":"粉粉生咖",
-            //         "quantity":"3"
-            //     },
-            //     {
-            //         "coffeeName":"燕麦拿铁",
-            //         "quantity":"3"
-            //     }
-            // ]
             }
         })
 // 获取咖啡图片

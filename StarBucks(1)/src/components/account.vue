@@ -75,15 +75,72 @@
   </div>
   
   </el-card>
-  <!-- <el-card v-show="userStore.user.root==1" class="card" style="margin-top: 10px;">
+  <el-card v-show="userStore.user.root==1" class="card" style="margin-top: 10px;">
     <div  style="margin-top:30px">
   <h2>管理员模式专属</h2>
   <hr>
-
-  <el-button type="primary"  >确认</el-button>
+  <!-- <div class="form">
+        用户名输入框
+        <div :class="(userInputing || form.username ?'active ':'')+'user'">
+              <div class="text">用户名(长度5-13位)</div>
+              <input
+                type="text"
+                v-model="form.username"
+                @focus="userInputing =true"
+                @blur="userInputing =false"
+              />
+            </div>
+            密码输入框
+        <div :class="(passwordInputing || form.password?'active ':'')+'password'">
+              <div class="text">密码(长度5-13位)</div>
+              <input
+                type="password"
+                v-model="form.password"
+                @focus="passwordInputing =true"
+                @blur="passwordInputing =false"
+              />
+        </div>
+        确认密码输入框
+        <div :class="(newpasswordInputing || password?'active ':'')+'password'">
+              <div class="text">确认密码</div>
+              <input
+                type="password"
+                v-model="password"
+                @focus="newpasswordInputing =true"
+                @blur="newpasswordInputing =false"
+              />
+        </div>
+            注册按钮
+            
+     </div> -->
+     <el-form :model="form" label-width="auto" style="max-width: 500px">
+    <el-form-item label="用户名">
+      <el-input v-model="form.username" 
+              type="text"
+              @focus="userInputing =true"
+              @blur="userInputing =false"
+               placeholder="(长度5-13位)"
+      />
+    </el-form-item>
+    <el-form-item label="密码" >
+      <el-input v-model="form.password" type="password"
+                @focus="passwordInputing =true"
+                @blur="passwordInputing =false"
+                placeholder="(长度5-13位)"/>
+             
+          </el-form-item>
+          <el-form-item label="确认密码" >
+      <el-input v-model="password" type="password"
+                @focus="newpasswordInputing =true"
+                @blur="newpasswordInputing =false"
+                placeholder="(长度5-13位)"/>     
+          </el-form-item>
+ 
+  </el-form>
+  <el-button type="primary"   @click="handleRegister" >确认创建新管理员</el-button>
  
  </div>
-  </el-card> -->
+  </el-card>
  </div>
 
 </template>
@@ -93,7 +150,7 @@ import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router=useRouter();
 import { useUserStore } from '@/store/user';
-import { getOrderList, register } from '@/utils/api';
+import { addAdmin, getOrderList } from '@/utils/api';
 import { ElMessage } from 'element-plus';
 const userStore=useUserStore();
 const orderNumber=ref(0);
@@ -119,29 +176,30 @@ function change(){
 var orderList:any=[]
 // 
 
-// const form=reactive({
-//             username: "",
-//             password: ""
-//           })
-//     const password=ref("")
-//     const passwordInputing=ref(false)
-//     const newpasswordInputing=ref(false)
-//     function handleRegister(){
-//   if(form.username.length!=0&&form.password.length!=0){
-//   if(password.value==form.password){
-//   register(form).then(res=>{  
-//   if(res.data==101){
-//     ElMessage({
-//     message: '管理员账号注册成功',
-//     type: 'success',
-//   })
-//      }
+const form=reactive({
+            username: "",
+            password: ""
+          })
+    const userInputing=ref(false);
+    const password=ref("")
+    const passwordInputing=ref(false)
+    const newpasswordInputing=ref(false)
+function handleRegister(){
+  if(form.username.length!=0&&form.password.length!=0){
+  if(password.value==form.password){
+  addAdmin(form).then(res=>{  
+  if(res.code==101){
+    ElMessage({
+    message: '管理员账号注册成功',
+    type: 'success',
+  })
+     }
     
-// })
-//     }else{
-//       ElMessage.error('两次输入密码不一致')
-//     } }
-//   }
+})
+    }else{
+      ElMessage.error('两次输入密码不一致')
+    } }
+  }
 // 挂载
 // 获取历史订单信息
 onMounted(()=>{

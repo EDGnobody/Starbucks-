@@ -50,7 +50,36 @@
   <div v-show="userStore.user.root==1" style="margin-top:30px">
   <h2>管理员模式专属</h2>
   <hr>
-  
+  <el-card class="box-card" style="width: 100%">
+      <template #header>
+        <div class="card-header">
+          <span>  添加新门店</span>
+        </div>
+      </template>
+      <el-form :model="form" label-width="auto" style="max-width: 500px">
+    <el-form-item label="门店名字">
+      <el-input v-model="form.name" />
+    </el-form-item>
+    <el-form-item label="门店地址">
+      <el-input v-model="form.location" />
+    </el-form-item>
+    <el-form-item label="电话号码" >
+            <el-input v-model.number="form.phone" type="number" autocomplete="off" placeholder="请输入门店电话号码">
+        </el-input>
+          </el-form-item>
+          <el-form-item label="门店经度" >
+            <el-input v-model.number="form.latitude" type="number" autocomplete="off" placeholder="请输入门店经度(0-180)">
+        </el-input>
+          </el-form-item>
+          <el-form-item label="门店纬度" >
+            <el-input v-model.number="form.longitude" type="number" autocomplete="off" placeholder="请输入门店纬度(0-90)">
+        </el-input>
+          </el-form-item>
+  </el-form>
+  <!-- 上传图片 -->
+   
+  <el-button type="primary" @click="addNewStore" >确认添加新门店</el-button>
+    </el-card>
  </div>
   <!-- 地址列表 -->
   <div class="demo-collapse">
@@ -85,13 +114,14 @@
 <script lang="ts" setup >
 
 const props=defineProps(['page'])
-import { onBeforeMount, onMounted, ref, toRefs } from 'vue';
+import { onBeforeMount, onMounted, reactive, ref, toRefs } from 'vue';
 import { useUserStore } from '@/store/user';
-import { getCoffeeList, getStoreList } from '@/utils/api';
+import { createStore, getStoreList } from '@/utils/api';
 import { Location } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
 import { useListStore } from '@/store/store';
+import { ElMessage } from 'element-plus';
 const number=ref(0)
 const userStore=useUserStore();
 const listStore=useListStore()
@@ -101,6 +131,14 @@ const route=useRoute()
 function changeAddress(x:any,y:any){
   // router.push({ name: 'address', params: { latitude: x,longitude:y }})
 }
+const form=reactive({
+            name: "",
+            location:"",
+            phone: "",
+            latitude:"",
+            province:"武汉",
+            longitude:""
+          })
 var storeList:any=[]
 onMounted(()=>{
         getStoreList().then(res=>{
@@ -137,6 +175,22 @@ if (hours >= 6 && hours < 11) {
   greetingIndex = 3;
 } else {
   greetingIndex = 4;
+}
+
+function addNewStore(){
+  if(form.latitude!=""&&form.location!=""&&form.name!=""&&form.phone!=""&&form.longitude!=""){
+  
+  createStore (form).then(res=>{  
+    console.log(777)
+    console.log(res)
+  if(res.code==101){
+    ElMessage({
+    message: '门店添加成功',
+    type: 'success',
+  })
+     }  
+})
+  }
 }
 </script>
 
