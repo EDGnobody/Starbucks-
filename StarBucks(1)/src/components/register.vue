@@ -58,7 +58,7 @@
             <!-- 注册按钮 -->
             <div class="footer clear">
               <div
-                :class="(form.username&&form.password&&password? 'active ':'')+'login-btn'"
+                :class="(form.username&&form.password&&password&&form.code&&form.email? 'active ':'')+'login-btn'"
                 @click="handleRegister"
               >注册</div>
             </div>
