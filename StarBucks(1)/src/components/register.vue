@@ -14,6 +14,27 @@
                 @blur="userInputing =false"
               />
             </div>
+            <!-- 邮箱输入框 -->
+      <div :class="(emailInputing || form.email ?'active ':'')+'password'">
+              <div class="text">邮箱地址</div>
+              <el-button type="success" plain style="margin-left: 90%;" @click="code">获取验证码</el-button>
+              <input
+                type="text"
+                v-model="form.email"
+                @focus="emailInputing =true"
+                @blur="emailInputing =false"
+              />
+            </div>
+            <!-- 验证码输入框 -->
+            <div :class="(codeInputing || form.code?'active ':'')+'password'">
+              <div class="text">验证码</div>
+              <input
+                type="text"
+                v-model="form.code"
+                @focus="codeInputing =true"
+                @blur="codeInputing =false"
+              />
+        </div>
             <!-- 密码输入框 -->
         <div :class="(passwordInputing || form.password?'active ':'')+'password'">
               <div class="text">密码(长度5-13位)</div>
@@ -53,7 +74,7 @@
     
     <script lang="ts" setup >
     import { reactive, ref } from 'vue';
-    import { register ,login} from '@/utils/api';
+    import { register ,login,getCode} from '@/utils/api';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/store/user';
 import { ElMessage } from 'element-plus';
@@ -61,17 +82,22 @@ const userStore=useUserStore();
     const userInputing=ref(false);
     const form=reactive({
             username: "",
-            password: ""
+            password: "",
+            email:"",
+            code:""
           })
     const password=ref("")
     const passwordInputing=ref(false)
     const newpasswordInputing=ref(false)
+    const emailInputing=ref(false)
+    const codeInputing=ref(false)
     const router=useRouter();
     // 注册函数
 function handleRegister(){
-  if(form.username.length!=0&&form.password.length!=0){
+  if(form.username.length!=0&&form.password.length!=0&&form.email.length!=0&&form.code.length!=0){
   if(password.value==form.password){
-  register(form).then(res=>{  
+    if(form.code==realCode.value){
+      register(form).then(res=>{  
   if(res.code==101){
     console.log(777)
     login(form).then(res=>{
@@ -82,13 +108,24 @@ function handleRegister(){
      }  
    })
      }
-    
 })
+    }else{
+      ElMessage.error('验证码错误')
+    }
+ 
     }else{
       ElMessage.error('两次输入密码不一致')
     } }
   }
   // 用户信息存入浏览器
+  // 获取验证码
+  const realCode=ref("")
+  function code(){
+   getCode(form).then(res=>{
+    realCode.value=res.data;
+    console.log(realCode.value)
+   })
+  }
     </script>
     
     <style scoped>

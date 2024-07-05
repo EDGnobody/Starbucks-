@@ -19,9 +19,24 @@ export const register =(params:any)=>
             method:"post",
             params: {
                 username: params.username,
-                password: params.password
+                password: params.password,
+                email:params.email
               }
         })
+// 获取用户验证码
+export const getCode =(params:any)=>
+    $http(
+        {
+            url:"/user/send_verification_code",
+            method:"post",
+            params: {
+                email:params.email
+            }
+        })
+
+
+
+
 
 export const  addAdmin=(params:any)=>
     $http(
