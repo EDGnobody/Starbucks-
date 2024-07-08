@@ -67,4 +67,22 @@ public class UserServiceImpl implements UserService {
         Integer id = (Integer) m.get("id");
         usermapper.updatePassword(newPwd,id);
     }
+
+    @Override
+    public void registerAdmin(String username, String password) {
+        //加密
+        String Md5String = Md5Util.getMD5String(password);
+        //添加到数据库
+        usermapper.addAdmin(username,Md5String);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        usermapper.saveUser(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return usermapper.findByEmail(email);
+    }
 }

@@ -3,8 +3,10 @@ package com.starbucks.coffee_order.controller;
 import com.starbucks.coffee_order.pojo.Result;
 import com.starbucks.coffee_order.pojo.Token;
 import com.starbucks.coffee_order.pojo.UserUpdate;
+import com.starbucks.coffee_order.service.EmailService;
 import com.starbucks.coffee_order.service.UserService;
 import com.starbucks.coffee_order.pojo.User;
+import com.starbucks.coffee_order.service.VerificationCodeService;
 import com.starbucks.coffee_order.utils.JwtUtil;
 import com.starbucks.coffee_order.utils.Md5Util;
 import com.starbucks.coffee_order.utils.ThreadLocalUtil;
@@ -16,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,22 +30,11 @@ public class UserController {
     @Autowired
     private UserService userservice;
 
-    @PostMapping("/register")
-    public Result<String> register(@Pattern(regexp = "^\\S{5,16}$") String username,
-                                   @Pattern(regexp = "^\\S{5,16}$") String password){
+    @Autowired
+    private EmailService emailService;
 
-        //查找用户
-        User u = userservice.findByUsername(username);
-        if(null == u)
-        {
-            userservice.register(username,password);
-            return Result.success();
-        }
-        else
-        {
-            return Result.error(301,"该用户名已被注册");
-        }
-    }
+    @Autowired
+    private VerificationCodeService verificationCodeService;
 
     @PostMapping("/login")
     public Result<Token> login(@Pattern(regexp = "^\\S{5,16}$") String username, @Pattern(regexp = "^\\S{5,16}$") String password){
@@ -68,6 +60,20 @@ public class UserController {
             {
                 return Result.error(303,"密码错误",null);
             }
+        }
+    }
+
+    @PostMapping("/register_admin")
+    public Result<String> registerAdmin(@Valid String username, @Valid String password){
+        User u = userservice.findByUsername(username);
+        if(null == u)
+        {
+            userservice.registerAdmin(username,password);
+            return Result.success();
+        }
+        else
+        {
+            return Result.error(301,"该用户名已被注册");
         }
     }
 
@@ -119,5 +125,42 @@ public class UserController {
         String Md5 = Md5Util.getMD5String(newPwd);
         userservice.updatePassword(Md5);
         return Result.success();
+    }
+
+    @PostMapping("/send_verification_code")
+    public Result<String> sendVerificationCode(@RequestParam String email) {
+        String code = verificationCodeService.generateCode(email);
+
+        try {
+            emailService.sendEmail(email, "验证码", "您的验证码: " + code);
+            return Result.success(code);
+        } catch (MessagingException | jakarta.mail.MessagingException e) {
+            return Result.error(500, "发送邮件失败");
+        }
+    }
+
+    @PostMapping("/register")
+    public Result<String> register(@RequestParam String email,
+                                   @RequestParam String username,
+                                   @RequestParam String password) {
+
+        if (userservice.findByEmail(email) != null) {
+            return Result.error(409, "邮箱已被注册");
+        }
+
+        if (userservice.findByUsername(username) != null) {
+            return Result.error(409, "用户名已被注册");
+        }
+
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        String Md5 = Md5Util.getMD5String(password);
+        user.setPassword(Md5); // 或者您可以要求用户提供密码
+        userservice.saveUser(user);
+
+        verificationCodeService.invalidateCode(email);
+
+        return Result.success("注册成功");
     }
 }

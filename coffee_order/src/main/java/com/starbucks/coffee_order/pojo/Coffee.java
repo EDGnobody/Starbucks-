@@ -25,7 +25,7 @@ public class Coffee {
 
     private String category = "咖啡";
 
-    private String picture ;
+    private String picture = "a99e6540-577d-4cd9-8aa5-67a44c6c3021.jpg";
 
     private boolean available = true;
 
